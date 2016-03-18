@@ -1,6 +1,6 @@
 import {Creator} from './creator';
 
-const Components = {};
+const Components = {Creator};
 const Actions = {};
 const Reducers = {};
 

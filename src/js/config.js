@@ -1,6 +1,6 @@
 export default {
   creator: {
-      names: ['Kevin', 'Cathleen', 'Joanne'],
+      names: ['xorkevin'],
       copyright: 2015
   }
 };

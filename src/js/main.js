@@ -17,11 +17,11 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-ReactDOM.render(<App/>,
-  // <Provider store={store}>
-    // <Router history={history}>
-      // {App.route()}
-    // </Router>
-  // </Provider>,
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={history}>
+      {App.route()}
+    </Router>
+  </Provider>,
   document.getElementById('mount')
 );

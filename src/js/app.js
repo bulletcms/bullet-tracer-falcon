@@ -10,23 +10,30 @@ import CONFIG from './config';
 const {Creator} = Components;
 const {DoesNotExist, Home} = Views;
 
-const {creator} = CONFIG;
-
 class App extends React.Component{
   static route(){
-    return <Route path='/' component={App}>
-      <IndexRoute component={Home}/>
-      {DoesNotExist.route()}
-      {DoesNotExist.redirect()}
-    </Route>;
+    return (
+      <Route path='/' component={App}>
+        <IndexRoute component={Home}/>
+        {DoesNotExist.route()}
+        {DoesNotExist.redirect()}
+      </Route>
+    );
   }
 
   render(){
-    return <div className='app'>
-      Hello?
-      // {this.props.children}
-      // <Creator config={creator}/>
-    </div>;
+    return (
+      <div className='app'>
+        {this.props.children}
+        <Creator config={CONFIG.creator}/>
+      </div>
+    );
+    // return (
+    //   <div className='app'>
+    //     App Component
+    //   </div>
+    // );
+    //
   }
 }
 
