@@ -28,12 +28,6 @@ class App extends React.Component{
         <Creator config={CONFIG.creator}/>
       </div>
     );
-    // return (
-    //   <div className='app'>
-    //     App Component
-    //   </div>
-    // );
-    //
   }
 }
 

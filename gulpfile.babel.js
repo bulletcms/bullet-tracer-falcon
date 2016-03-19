@@ -16,6 +16,9 @@ import buffer from 'vinyl-buffer';
 import 'babelify';
 import uglify from 'gulp-uglify';
 
+//SCSS//
+import scss from 'gulp-sass';
+
 //LOCAL SERVE//
 import webserver from 'gulp-webserver';
 
@@ -27,6 +30,8 @@ const PATHS = {
   DISTJSOUT: 'main.min.js',
   JSDIR: 'src/js/**',
   MAINJS: 'src/js/main.js',
+  SCSSDIR: 'src/scss/**',
+  MAINSCSS: 'src/scss/main.scss',
   ASSETS: 'src/assets/**',
   INDEXHTML: 'src/index.html',
 };
@@ -51,6 +56,20 @@ jsbuild.flags = {
 gulp.task(jsbuild);
 
 
+let scssbuild = ()=>{
+  return gulp.src(PATHS.MAINSCSS)
+    .pipe(gulpif(argv.d, scss()))
+    .pipe(gulpif(!argv.d, scss({ style: 'compressed' })))
+    .pipe(gulpif(!argv.d, size()))
+    .pipe(gulp.dest(PATHS.DIST));
+};
+scssbuild.description = 'processes scss';
+scssbuild.flags = {
+  '-d': 'builds in dev mode (no minification)'
+};
+gulp.task(scssbuild);
+
+
 let htmlbuild = ()=>{
   return gulp.src(PATHS.INDEXHTML)
     .pipe(gulp.dest(PATHS.DIST));
@@ -70,9 +89,10 @@ gulp.task(assetsbuild);
 
 
 let watch = ()=>{
-  gulp.watch(PATHS.JSDIR, (cb)=>{gulp.series('jsbuild')(); cb()});
-  gulp.watch(PATHS.INDEXHTML, (cb)=>{gulp.series('htmlbuild')(); cb()});
-  gulp.watch(PATHS.ASSETS, (cb)=>{gulp.series('assetsbuild')(); cb()});
+  gulp.watch(PATHS.JSDIR, (cb)=>{gulp.series('jsbuild')(); cb();});
+  gulp.watch(PATHS.SCSSDIR, (cb)=>{gulp.series('scssbuild')(); cb();})
+  gulp.watch(PATHS.INDEXHTML, (cb)=>{gulp.series('htmlbuild')(); cb();});
+  gulp.watch(PATHS.ASSETS, (cb)=>{gulp.series('assetsbuild')(); cb();});
   gutil.log('LOADED');
 };
 watch.description = 'watches js, css, html, assets';
@@ -110,7 +130,7 @@ FLAGS
 let build = ()=>{
   return gulp.series(
     'clean',
-    gulp.parallel('jsbuild', 'htmlbuild', 'assetsbuild'),
+    gulp.parallel('jsbuild', 'scssbuild', 'htmlbuild', 'assetsbuild'),
     'serve',
     'watch'
   )();

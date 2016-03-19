@@ -1,11 +1,5 @@
 import React from 'react';
 
-const style = {
-  creatorText: {
-    fontSize: '0.75rem'
-  }
-}
-
 class Creator extends React.Component{
   nameArrToStr(nameArr){
     let k = '';
@@ -31,9 +25,11 @@ class Creator extends React.Component{
 
   render(){
     let {names, copyright} = this.props.config;
-    return <div style={style.creatorText}>
-      <span className="fa-stack"><i className="fa fa-square fa-stack-2x"></i><i className="fa fa-terminal fa-stack-1x fa-inverse"></i></span> with <i className="fa fa-heart"></i> by {this.nameArrToStr(names)}<br/>
-      &copy; {copyright} - {new Date().getFullYear()}
+    return <div>
+      <small>
+        <span className="fa-stack"><i className="fa fa-square fa-stack-2x"></i><i className="fa fa-terminal fa-stack-1x fa-inverse"></i></span> with <span className="fa-stack"><i className="fa fa-heart fa-stack-1x"></i></span> by {this.nameArrToStr(names)}<br/>
+        &copy; {copyright} - {new Date().getFullYear()}
+      </small>  
     </div>;
   }
 }
