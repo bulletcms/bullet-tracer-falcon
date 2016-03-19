@@ -3,7 +3,7 @@ import {Route} from 'react-router';
 
 class Home extends React.Component {
   static route(){
-    return <Route path='home' component={HomeComponent}/>;
+    return <Route path='home' component={Home}/>;
   }
 
   render(){
