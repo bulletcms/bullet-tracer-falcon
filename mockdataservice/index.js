@@ -3,6 +3,7 @@ import express from 'express';
 const MOCKAPI = {
   page: {
     about: {
+      component: 'div',
       content: [
         {
           component: 'h1',

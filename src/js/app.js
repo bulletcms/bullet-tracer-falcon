@@ -1,14 +1,16 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import {Views} from './views';
 
+import {Views} from './views';
 import {Components, Reducers} from './components';
+import {Layouts} from './layouts';
 
 import CONFIG from './config';
 
+const {} = Views;
 const {Creator} = Components;
-const {DoesNotExist, Home, Page} = Views;
+const {DoesNotExist, Home, Page} = Layouts;
 
 class App extends React.Component{
   static route(){
