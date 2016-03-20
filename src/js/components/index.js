@@ -1,7 +1,7 @@
 import {Creator} from './creator';
-import {PageRenderer} from './pagerenderer';
+import {Bulletmark} from './bulletmark';
 
-const Components = {Creator, PageRenderer};
+const Components = {Creator, Bulletmark};
 const Actions = {};
 const Reducers = {};
 
