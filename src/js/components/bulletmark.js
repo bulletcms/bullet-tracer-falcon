@@ -1,18 +1,10 @@
-import React from 'react';
-import fetch from 'whatwg-fetch';
-
-const fetchAction = ()=>{
-
-};
-
-class Bulletmark extends React.Component {
-
-  render(){
-
+class Bulletmark {
+  static render(viewtree){
+    // view tree : json component array
     return <div>
-      Page Renderer
+      I am a view tree.
     </div>;
   }
-}
+};
 
 export {Bulletmark};

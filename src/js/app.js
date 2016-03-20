@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-
 import {Views} from './views';
 import {Components, Reducers} from './components';
 import {Layouts} from './layouts';
@@ -12,7 +11,7 @@ const {} = Views;
 const {Creator} = Components;
 const {DoesNotExist, Home, Page} = Layouts;
 
-class App extends React.Component{
+class App extends React.Component {
   static route(){
     return <Route path='/' component={App}>
       <IndexRoute component={Home}/>
