@@ -1,4 +1,5 @@
 import fetch from 'whatwg-fetch';
+import Immutable from 'immutable';
 
 const FETCH_PAGE = Symbol('FETCH_PAGE');
 const FETCHING_PAGE = Symbol('FETCHING_PAGE');
@@ -44,20 +45,25 @@ const fetchPage = (base, url)=>{
   };
 };
 
-const PageFetchActions = {fetchPage, fetchingPage, receivePage, receivePageFailed};
+const PageFetchActions = {fetchPage};
 
-const PageFetchReducer = (state={
-  pages: {}
-}, action)=>{
+// update time is in sec
+const defaultState = Immutable.fromJS({pages: {}, standardupdatetime: 512});
+
+const UpdatePage = (state=defaultState, page, content, force=false)=>{
+  if(force || !(state.getIn(['pages', page])) || Math.floor(Date.now() / 1000) - state.getIn(['pages', page, 'updatetime']) > state.getIn(['standardupdatetime'])){
+    return state.setIn(['pages', page], Immutable.fromJS({content: Immutable.fromJS(content), fetching: false, updatetime: Math.floor(Date.now() / 1000)}));
+  }
+  return state;
+};
+
+const PageFetchReducer = (state=defaultState, action)=>{
   switch (action.type) {
-    case FETCH_PAGE:
-      return state;
-    case FETCHING_PAGE:
-      return state;
     case RECEIVE_PAGE:
-      return state;
+      return UpdatePage(state, action.url, action.page, action.content);
     case RECEIVE_PAGE_FAILED:
-      return state;
+    case FETCH_PAGE:
+    case FETCHING_PAGE:
     default:
       return state;
   }

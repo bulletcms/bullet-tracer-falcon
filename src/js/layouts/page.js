@@ -1,5 +1,9 @@
 import React from 'react';
 import {Route} from 'react-router';
+import {connect} from 'react-redux';
+import {Actions} from '../components';
+
+const {PageFetchActions: fetchPage} = Actions;
 
 class Page extends React.Component {
   static route(routeconfig){
