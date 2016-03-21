@@ -5,11 +5,11 @@ export default {
   },
   pages: {
     base: {
-      filename: 'localhost:3000/api/'
+      filename: 'localhost:3000/api/page/'
     },
     about: {
       path: 'about',
-      filename: 'page/about'
+      filename: 'about'
     }
   }
 };
