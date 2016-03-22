@@ -1,3 +1,4 @@
+import {Creator} from './creator';
 import {DateView} from './dateview';
 import {Hover} from './hover';
 

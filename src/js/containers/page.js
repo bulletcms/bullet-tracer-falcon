@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route} from 'react-router';
 import {connect} from 'react-redux';
-import {Actions} from '../components';
+import {Actions} from '../controllers';
 
 const {PageFetchActions: fetchPage} = Actions;
 
