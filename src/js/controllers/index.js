@@ -1,7 +1,8 @@
 import {Bulletmark} from './bulletmark';
 import {PageFetchActions, PageFetchReducer} from './pagefetch';
 
+const Services = {Bulletmark};
 const Actions = {PageFetchActions};
-const Reducers = {Bulletmark, PageFetchReducer};
+const Reducers = {PageFetchReducer};
 
-export {Actions, Reducers};
+export {Services, Actions, Reducers};

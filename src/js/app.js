@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
 import {Views} from './views';
-import {Actions, Reducers} from './controllers';
+import {Reducers} from './controllers';
 import {Containers} from './containers';
 
 import CONFIG from './config';

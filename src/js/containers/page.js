@@ -1,9 +1,10 @@
 import React from 'react';
 import {Route} from 'react-router';
 import {connect} from 'react-redux';
-import {Actions} from '../controllers';
+import {Services, Actions} from '../controllers';
 
 const {PageFetchActions: fetchPage} = Actions;
+const {BulletmarkRender} = Services;
 
 class Page extends React.Component {
   static route(routeconfig){

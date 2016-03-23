@@ -1,5 +1,5 @@
-const Bulletmark = (viewjson, views)=>{
-  // view json : json component array; views : map of tag name to component jsx [ex: 'thecomponent': TheComponent]
+const BulletmarkRender = (viewjson, views)=>{
+  // view json : json component array; views : map of tag name to component jsx [ex: 'thecomponent': TheComponent];
   let viewtree = [];
 
   for(let i of viewjson){
@@ -14,4 +14,11 @@ const Bulletmark = (viewjson, views)=>{
   return viewtree;
 };
 
-export {Bulletmark};
+const BulletmarkCompile = (bulletmark, views)=>{
+  // bulletmark : yaml,cson like markup with markdown support; views : set of supported components;
+  let viewjson = {};
+
+  return viewjson;
+};
+
+export {BulletmarkRender, BulletmarkCompile};
