@@ -15,8 +15,43 @@ const BulletmarkRender = (viewjson, views)=>{
 };
 
 const BulletmarkCompile = (bulletmark, views)=>{
-  // bulletmark : yaml,cson like markup with markdown support; views : set of supported components;
+  // bulletmark : toml like markup with markdown support; views : set of supported components;
   let viewjson = {};
+
+  /*
+    [TheComponent]
+      [props]
+      prop1 = val1
+      prop2 = val2
+      prop3 = val3
+      ---
+      (children)
+      jsxitem1
+      jsxitem2
+      jsxitem3
+      ---
+    ---
+
+    h
+    #
+    ##
+    ###
+    ####
+    #####
+    ######
+
+    strong
+    **
+    emphasis
+    __
+
+
+
+
+
+  */
+
+  let components; // = bulletmark.splitbycharacter()
 
   return viewjson;
 };
