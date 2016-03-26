@@ -41,17 +41,28 @@ const BulletmarkCompile = (bulletmark, views)=>{
     ######
 
     strong
-    **
+    *text*
     emphasis
-    __
+    **text**
 
+    subscript
+    H_2 O
+    superscript
+    x^2 + 1
 
+    i am a paragraph.
 
+    i am also a paragraph.
 
+    i am also the start of the third paragraph.
+    i am not a fourth paragraph but instead the second sentence of the third.
 
+    '''
+    i am some code
+    '''
   */
 
-  let components; // = bulletmark.splitbycharacter()
+  let components = bulletmark.split('\n');
 
   return viewjson;
 };
