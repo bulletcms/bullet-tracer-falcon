@@ -19,31 +19,15 @@ const BulletmarkCompile = (bulletmark, views)=>{
   let viewjson = {};
 
   /*
-    [TheComponent]
-      [props]
-      prop1 = val1
-      prop2 = val2
-      prop3 = val3
-      ---
-      (children)
-      jsxitem1
-      jsxitem2
-      jsxitem3
-      ---
-    ---
+    # heading 1
+    ## heading 2
+    ### heading 3
+    #### heading 4
+    ##### heading 5
+    ###### heading 6
 
-    h
-    #
-    ##
-    ###
-    ####
-    #####
-    ######
-
-    strong
-    *text*
-    emphasis
-    **text**
+    *emphasized text*
+    **bolded text**
 
     subscript
     H_2 O
@@ -57,9 +41,36 @@ const BulletmarkCompile = (bulletmark, views)=>{
     i am also the start of the third paragraph.
     i am not a fourth paragraph but instead the second sentence of the third.
 
+    > I am a quote.
+    >
+    > I am another paragraph in this quote.
+
+    - this
+    - is
+    - a
+    - list
+
+    + this
+    + is
+    + an
+    + ordered
+    + list
+
     '''
-    i am some code
+    i am some block code
     '''
+
+    this is some `inline code`
+
+    [link](www.site.com)
+
+    [link](/relative/link)
+
+    !(www.site.com/image.jpg)
+
+    !(/relative/image.jpg)
+
+    {TheComponent | property=value another_property=another_value}
   */
 
   let components = bulletmark.split('\n');
