@@ -21,7 +21,6 @@ import scss from 'gulp-sass';
 
 //LOCAL SERVE//
 import webserver from 'gulp-webserver';
-import mockdataservice from './mockdataservice';
 
 
 const PATHS = {
@@ -110,7 +109,6 @@ gulp.task(clean);
 
 
 let serve = (cb)=>{
-  mockdataservice();
   return gulp.src(PATHS.DIST)
     .pipe(gulpif(argv.s, webserver({
       livereload: true,
@@ -118,7 +116,7 @@ let serve = (cb)=>{
       fallback: 'index.html'
     })));
 };
-serve.description = 'serves ./dist on localhost:8080 and mockdataservice on localhost:3000';
+serve.description = 'serves ./dist on localhost:8080';
 serve.flags = {
   '-s': 'serves application on localhost'
 };
