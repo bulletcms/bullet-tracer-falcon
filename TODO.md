@@ -10,3 +10,6 @@
     - [ ] use reselect to improve render time
   - [ ] renderer component action http get
   - [ ] renderer component assembles view from json
+    - [ ] possibly reactdomserver.rendertostaticmarkup
+- [ ] performance
+  - [ ] gulp-imagemin

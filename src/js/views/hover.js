@@ -22,7 +22,7 @@ class Hover extends React.Component {
     if(this.state.get('isHovering')){
       finalview = hoverview;
     }
-    return <span onMouseOver={()=>{this.handleMouseOver();}} onMouseOut={()=>{this.handleMouseOut();}}>{finalview}</span>;
+    return <span onMouseOver={this.handleMouseOver.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>{finalview}</span>;
   }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
 import Immutable from 'immutable';
 import {hashCode} from '../util';
@@ -7,10 +8,31 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = Immutable.Map({isDocked: false});
+    this.updating = false;
+  }
+
+  calculateDocked(){
+    console.log('oldstate', this.state);
+    this.setState(this.state.set('isDocked', false));
+    console.log('newstate', this.state);
+    this.updating = false;
   }
 
   handleScroll(){
-    this.setState(this.state.set('isDocked', false));
+    if(!this.updating){
+      window.requestAnimationFrame(this.calculateDocked.bind(this));
+    }
+    this.updating = true;
+  }
+
+  componentDidMount(){
+    this.scrollListener = this.handleScroll.bind(this);
+    this.domNode = ReactDOM.findDOMNode(this);
+    window.addEventListener('scroll', this.scrollListener);
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.scrollListener);
   }
 
   render(){
@@ -22,6 +44,7 @@ class Nav extends React.Component {
     }
 
     const navClassName = 'nav';
+    console.log('rendertimestate', this.state);
     if(this.state.get('isDocked')){
       docked += ' docked';
     }
