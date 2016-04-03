@@ -1,7 +1,6 @@
 import {DoesNotExist} from './doesnotexist';
-import {Home} from './home';
 import {Page} from './page';
 
-const Containers = {DoesNotExist, Home, Page};
+const Containers = {DoesNotExist, Page};
 
 export {Containers};

@@ -7,13 +7,13 @@ import {Containers} from './containers';
 
 import CONFIG from './config';
 
-const {Creator} = Views;
-const {DoesNotExist, Home, Page} = Containers;
+const {Nav, Creator} = Views;
+const {DoesNotExist, Page} = Containers;
 
 class App extends React.Component {
   static route(){
     return <Route path='/' component={App}>
-      <IndexRoute component={Home}/>
+      {Page.indexroute(CONFIG.pages.home)}
       {DoesNotExist.route()}
       {DoesNotExist.redirect()}
       {Page.route(CONFIG.pages.about)}
@@ -22,6 +22,7 @@ class App extends React.Component {
 
   render(){
     return <div className='app'>
+      <Nav config={CONFIG.nav}/>
       {this.props.children}
       <Creator config={CONFIG.creator}/>
     </div>;

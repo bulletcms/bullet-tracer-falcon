@@ -24,11 +24,18 @@ class Creator extends React.Component{
   }
 
   render(){
-    let {names, copyright} = this.props.config;
+    const {names, copyright} = this.props.config;
     return <div>
       <small>
-        <span className="fa-stack"><i className="fa fa-square fa-stack-2x"></i><i className="fa fa-terminal fa-stack-1x fa-inverse"></i></span> with <span className="fa-stack"><i className="fa fa-heart fa-stack-1x"></i></span> by {this.nameArrToStr(names)}<br/>
-        &copy; {copyright} - {new Date().getFullYear()}
+        <span className="fa-stack">
+          <i className="fa fa-square fa-stack-2x"></i>
+          <i className="fa fa-terminal fa-stack-1x fa-inverse"></i>
+        </span>
+        with
+        <span className="fa-stack">
+          <i className="fa fa-heart fa-stack-1x"></i>
+        </span>
+        by {this.nameArrToStr(names)} &copy; {copyright} - {new Date().getFullYear()}
       </small>
     </div>;
   }

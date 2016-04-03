@@ -142,6 +142,7 @@ h3 { font-size: 3.0rem; line-height: 1.3;  letter-spacing: -.1rem; }
 h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem; }
 h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; }
 h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+small { font-size: 0.9rem; }
 
 /* Larger than phablet */
 @media (min-width: 550px) {
@@ -418,3 +419,48 @@ there.
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
+
+/* Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+$height: 6.4rem;
+.nav {
+  .nav-spacer {
+    display: none;
+    height: $height;
+  }
+
+  .nav-container {
+    position: static;
+    height: $height;
+    width: 100%;
+
+    .nav-list {
+      list-style: none;
+      margin: 0;
+
+      .nav-item {
+        display: inline-block;
+        margin: 0 2.8rem 0 0;
+        padding: 0.2rem;
+
+        a {
+          text-decoration: none;
+          color: #222222;
+          line-height: $height;
+        }
+      }
+    }
+  }
+}
+
+.nav.docked {
+  .nav-spacer {
+    display: block;
+  }
+
+  .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+}

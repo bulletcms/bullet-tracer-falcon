@@ -185,6 +185,9 @@ h6 {
   line-height: 1.6;
   letter-spacing: 0; }
 
+small {
+  font-size: 0.9rem; }
+
 /* Larger than phablet */
 @media (min-width: 550px) {
   h1 {
@@ -466,3 +469,32 @@ there.
 /* Larger than tablet */
 /* Larger than desktop */
 /* Larger than Desktop HD */
+/* Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.nav .nav-spacer {
+  display: none;
+  height: 6.4rem; }
+
+.nav .nav-container {
+  position: static;
+  height: 6.4rem;
+  width: 100%; }
+  .nav .nav-container .nav-list {
+    list-style: none;
+    margin: 0; }
+    .nav .nav-container .nav-list .nav-item {
+      display: inline-block;
+      margin: 0 2.8rem 0 0;
+      padding: 0.2rem; }
+      .nav .nav-container .nav-list .nav-item a {
+        text-decoration: none;
+        color: #222222;
+        line-height: 6.4rem; }
+
+.nav.docked .nav-spacer {
+  display: block; }
+
+.nav.docked .nav-container {
+  position: fixed;
+  top: 0;
+  left: 0; }
