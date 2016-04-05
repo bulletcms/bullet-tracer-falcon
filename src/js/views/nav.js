@@ -7,14 +7,12 @@ import {hashCode} from '../util';
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = Immutable.Map({isDocked: false});
+    this.state = {data: Immutable.Map({isDocked: false})};
     this.updating = false;
   }
 
   calculateDocked(){
-    console.log('oldstate', this.state);
-    this.setState(this.state.set('isDocked', false));
-    console.log('newstate', this.state);
+    this.setState({data: this.state.data.set('isDocked', ReactDOM.findDOMNode(this).getBoundingClientRect().top <= 0)});
     this.updating = false;
   }
 
@@ -25,9 +23,13 @@ class Nav extends React.Component {
     this.updating = true;
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    return this.state.data.equals(nextState.data);
+  }
+
   componentDidMount(){
     this.scrollListener = this.handleScroll.bind(this);
-    this.domNode = ReactDOM.findDOMNode(this);
+
     window.addEventListener('scroll', this.scrollListener);
   }
 
@@ -43,10 +45,9 @@ class Nav extends React.Component {
       listItems.push(<li key={hashCode(i.path+i.name)} className="nav-item"><Link to={i.path}>{i.name}</Link></li>);
     }
 
-    const navClassName = 'nav';
-    console.log('rendertimestate', this.state);
-    if(this.state.get('isDocked')){
-      docked += ' docked';
+    let navClassName = 'nav';
+    if(this.state.data.get('isDocked')){
+      navClassName += ' docked';
     }
 
     return <nav className={navClassName}>
