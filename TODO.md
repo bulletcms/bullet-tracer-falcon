@@ -13,3 +13,5 @@
     - [ ] possibly reactdomserver.rendertostaticmarkup
 - [ ] performance
   - [ ] gulp-imagemin
+- [ ] style
+  - [ ] refactor scss into config and main
