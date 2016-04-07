@@ -3,7 +3,8 @@ export default {
     links: [
       {name: 'home', path: '/'},
       {name: 'about', path: '/about'},
-      {name: 'blog', path: '/blog'}
+      {name: 'blog', path: '/blog'},
+      {name: 'dash', path: '/dash'}
     ]
   },
   creator: {
@@ -24,5 +25,8 @@ export default {
       format: 'bulletjson',
       filename: 'about'
     }
+  },
+  dash: {
+    path: 'dash'
   }
 };
