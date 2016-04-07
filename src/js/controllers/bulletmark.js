@@ -1,11 +1,16 @@
 const BulletmarkRender = (viewjson, views)=>{
   // view json : json component array; views : map of tag name to component jsx [ex: 'thecomponent': TheComponent];
+  // {component : string, config : config props, children : json component array}
   let viewtree = [];
   let k=0;
   for(let i of viewjson){
     if(views[i.component]){
       const dynamiccomponent = views[i.component];
-      viewtree.push(<dynamiccomponent key={k} config={i.config}>{i.children}</dynamiccomponent>);
+      let children = '';
+      if(i.children.length > 0){
+        children = BulletmarkRender(i.children, views);
+      }
+      viewtree.push(<dynamiccomponent key={k} config={i.config}>{children}</dynamiccomponent>);
     }
     k++;
   }
