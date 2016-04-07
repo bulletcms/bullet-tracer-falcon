@@ -480,6 +480,7 @@ there.
 /*color*/
 /*sizes*/
 .dash-sidebar {
+  z-index: 1;
   background-color: #222222;
   color: #FAFAFF; }
   .dash-sidebar a {
@@ -506,29 +507,32 @@ there.
         .dash-sidebar .dash-sidebar-container ul.dash-list .dash-item div:hover {
           background-color: #111111; }
 
-.dash-container .title {
-  background-color: #239687;
-  color: #FAFAFF;
-  line-height: 8rem;
-  font-size: 2.4rem;
-  padding: 0 16px;
-  box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.5); }
-
-.dash-container .content {
-  padding: 16px;
-  box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5);
-  background-color: #FAFAFF; }
-  .dash-container .content .list {
-    list-style: none;
-    margin-bottom: 0; }
-    .dash-container .content .list .list-item {
-      margin-bottom: 0;
-      padding: 8px; }
-      .dash-container .content .list .list-item .options {
-        float: right;
-        list-style: none;
-        margin: 0; }
-        .dash-container .content .list .list-item .options .option {
-          display: inline-block;
-          margin: 0 1.2rem 0 0;
-          padding: 0.2rem; }
+.dash-container {
+  z-index: 2; }
+  .dash-container .title {
+    background-color: #239687;
+    color: #FAFAFF;
+    line-height: 8rem;
+    font-size: 2.4rem;
+    padding: 0 16px;
+    box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.5);
+    z-index: 2; }
+  .dash-container .content {
+    padding: 16px;
+    box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5);
+    background-color: #FAFAFF;
+    z-index: 1; }
+    .dash-container .content .list {
+      list-style: none;
+      margin-bottom: 0; }
+      .dash-container .content .list .list-item {
+        margin-bottom: 0;
+        padding: 8px; }
+        .dash-container .content .list .list-item .options {
+          float: right;
+          list-style: none;
+          margin: 0; }
+          .dash-container .content .list .list-item .options .option {
+            display: inline-block;
+            margin: 0 1.2rem 0 0;
+            padding: 0.2rem; }
