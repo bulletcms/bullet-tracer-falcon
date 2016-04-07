@@ -3,10 +3,11 @@ const BulletmarkRender = (viewjson, views)=>{
   let viewtree = [];
 
   for(let i of viewjson){
-    let k;
+    let k=0;
     if(views[i.component]){
       const dynamiccomponent = views[i.component];
-      viewtree.push(<dynamiccomponent config={i.config}>{i.children}</dynamiccomponent>);
+      viewtree.push(<dynamiccomponent key={k} config={i.config}>{i.children}</dynamiccomponent>);
+      k++;
     } else {
       viewtree.push('');
     }
