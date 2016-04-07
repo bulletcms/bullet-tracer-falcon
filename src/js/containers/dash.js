@@ -30,6 +30,16 @@ class DashAuth extends React.Component {
 }
 
 class DashPages extends React.Component {
+  handleAddPage(){
+    const newpagetitle = this.refs.newpagetitle.value;
+    this.refs.newpagetitle.value = '';
+    const newpagepath = this.refs.newpagepath.value;
+    this.refs.newpagepath.value = '';
+    const newpage = this.refs.newpage.value;
+    this.refs.newpage.value = '';
+    console.log(newpagetitle, newpagepath, newpage);
+  }
+
   render(){
     return <div>
       <div className="title">
@@ -38,12 +48,12 @@ class DashPages extends React.Component {
       <div className="content">
         <div className="container">
           <h4>New Page</h4>
-          <input id="newpagetitle" className="editortitle" placeholder="Page Title"/>
-          <input id="newpagepath" className="editorpath" placeholder="Page Path"/>
+          <input ref="newpagetitle" className="editortitle" placeholder="Page Title"/>
+          <input ref="newpagepath" className="editorpath" placeholder="Page Path"/>
           <br/>
-          <textarea id="newpage" className="editor" cols="80" placeholder="Page Content"></textarea>
+          <textarea ref="newpage" className="editor" cols="80" placeholder="Page Content"></textarea>
           <br/>
-          <button className="button">Add Page</button>
+          <button className="button" onClick={this.handleAddPage.bind(this)}>Add Page</button>
           <hr/>
           <h4>Pages</h4>
           <ul className="list">
@@ -87,13 +97,13 @@ class DashBlog extends React.Component {
 
 class Dash extends React.Component {
   static route(routeconfig){
-    return [<Route path={routeconfig.path} component={Dash}>
+    return [<Route key='0' path={routeconfig.path} component={Dash}>
       <IndexRoute component={DashIndex}/>
       <Route path='auth' component={DashAuth}/>
       <Route path='pages' component={DashPages}/>
       <Route path='blog' component={DashBlog}/>
     </Route>,
-    <Redirect from='dash/*' to='dash'/>];
+    <Redirect key='1' from='dash/*' to='dash'/>];
   }
 
   render(){
