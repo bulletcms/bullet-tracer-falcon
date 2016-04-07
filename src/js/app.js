@@ -17,7 +17,6 @@ class App extends React.Component {
       {Page.route(CONFIG.pages.about)}
       {Dash.route(CONFIG.dash)}
       {DoesNotExist.route()}
-      {DoesNotExist.redirect()}
     </Route>;
   }
 

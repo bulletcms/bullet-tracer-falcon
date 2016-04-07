@@ -3,11 +3,8 @@ import {Route, Redirect} from 'react-router';
 
 class DoesNotExist extends React.Component{
   static route(){
-    return <Route path='404' component={DoesNotExist}/>;
-  }
-
-  static redirect(){
-    return <Redirect from='*' to='404'/>;
+    // must always place this route last, else redirect will catch all routes
+    return [<Route path='404' component={DoesNotExist}/>, <Redirect from='*' to='404'/>];
   }
 
   render(){
