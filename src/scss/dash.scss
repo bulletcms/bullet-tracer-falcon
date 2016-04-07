@@ -3,26 +3,39 @@
 
 /* Sidebar
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/*color*/
+$coloraccent: #239687;
+$colorhighlight: #AAFAFF;
+$colorbase: #222222;
+$colorlight: #FAFAFF;
+$colordark: #111111;
+
+/*sizes*/
+$titlebarheight: 8.0rem;
+
 .dash-sidebar {
-  background-color: #222222;
-  color: #FAFAFF;
+  background-color: $colorbase;
+  color: $colorlight;
 
   a {
     text-decoration: none;
     color: inherit;
 
     &:hover {
-      color: #AAFAFF;
+      color: $colorhighlight;
     }
   }
 
   .dash-title {
     text-align: center;
-    line-height: 8rem;
-    font-size: 2.4rem;
+    line-height: $titlebarheight;
+    font-size: 2.0rem;
+    background-color: $coloraccent;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
   }
 
-  .dash-container {
+  .dash-sidebar-container {
     ul.dash-list {
       list-style: none;
       margin-bottom: 0;
@@ -36,9 +49,34 @@
           font-size: 1.6rem;
           line-height: 3.2rem;
           &:hover {
-            background-color: #000000;
+            background-color: $colordark;
           }
         }
+      }
+    }
+  }
+}
+
+.dash-container {
+  .title {
+    background-color: $coloraccent;
+    color: $colorlight;
+    line-height: $titlebarheight;
+    font-size: 2.4rem;
+    padding: 0 16px;
+    box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .content {
+    padding: 16px;
+    box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5);
+
+    .list {
+      list-style: none;
+      margin-bottom: 0;
+
+      .list-item {
+        margin-bottom: 0;
       }
     }
   }

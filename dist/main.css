@@ -43,70 +43,66 @@
   .container {
     width: 80%; }
   .column {
-    margin-left: 4%; }
-  .column:first-child {
     margin-left: 0; }
-  .one.column,
   .one.column {
-    width: 4.66666666667%; }
+    width: 8.33333333333%; }
   .two.column {
-    width: 13.3333333333%; }
+    width: 16.6666666667%; }
   .three.column {
-    width: 22%; }
+    width: 25.0%; }
   .four.column {
-    width: 30.6666666667%; }
+    width: 33.3333333333%; }
   .five.column {
-    width: 39.3333333333%; }
+    width: 41.6666666667%; }
   .six.column {
-    width: 48%; }
+    width: 50.0%; }
   .seven.column {
-    width: 56.6666666667%; }
+    width: 58.3333333333%; }
   .eight.column {
-    width: 65.3333333333%; }
+    width: 66.6666666667%; }
   .nine.column {
-    width: 74.0%; }
+    width: 75.0%; }
   .ten.column {
-    width: 82.6666666667%; }
+    width: 83.3333333333%; }
   .eleven.column {
-    width: 91.3333333333%; }
+    width: 91.6666666667%; }
   .twelve.column {
-    width: 100%;
-    margin-left: 0; }
+    width: 100.0%; }
   .one-third.column {
-    width: 30.6666666667%; }
+    width: 33.3333333333%; }
   .two-thirds.column {
-    width: 65.3333333333%; }
+    width: 66.6666666667%; }
   .one-half.column {
-    width: 48%; }
+    width: 50.0%; }
   /* Offsets */
   .offset-by-one.column {
-    margin-left: 8.66666666667%; }
+    margin-left: 8.33333333333%; }
   .offset-by-two.column {
-    margin-left: 17.3333333333%; }
+    margin-left: 16.6666666667%; }
   .offset-by-three.column {
-    margin-left: 26%; }
+    margin-left: 25.0%; }
   .offset-by-four.column {
-    margin-left: 34.6666666667%; }
+    margin-left: 33.3333333333%; }
   .offset-by-five.column {
-    margin-left: 43.3333333333%; }
+    margin-left: 41.6666666667%; }
   .offset-by-six.column {
-    margin-left: 52%; }
+    margin-left: 50.0%; }
   .offset-by-seven.column {
-    margin-left: 60.6666666667%; }
+    margin-left: 58.3333333333%; }
   .offset-by-eight.column {
-    margin-left: 69.3333333333%; }
+    margin-left: 66.6666666667%; }
   .offset-by-nine.column {
-    margin-left: 78.0%; }
+    margin-left: 75.0%; }
   .offset-by-ten.column {
-    margin-left: 86.6666666667%; }
+    margin-left: 83.3333333333%; }
   .offset-by-eleven.column {
-    margin-left: 95.3333333333%; }
+    margin-left: 91.6666666667%; }
   .offset-by-one-third.column {
-    margin-left: 34.6666666667%; }
+    margin-left: 33.3333333333%; }
   .offset-by-two-thirds.column {
-    margin-left: 69.3333333333%; }
+    margin-left: 66.6666666667%; }
   .offset-by-one-half.column {
-    margin-left: 52%; } }
+    margin-left: 50.0%; } }
 
 /* Base Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -479,6 +475,8 @@ there.
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /* Sidebar
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*color*/
+/*sizes*/
 .dash-sidebar {
   background-color: #222222;
   color: #FAFAFF; }
@@ -490,16 +488,35 @@ there.
   .dash-sidebar .dash-title {
     text-align: center;
     line-height: 8rem;
-    font-size: 2.4rem; }
-  .dash-sidebar .dash-container ul.dash-list {
+    font-size: 2.0rem;
+    background-color: #239687;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5); }
+  .dash-sidebar .dash-sidebar-container ul.dash-list {
     list-style: none;
     margin-bottom: 0; }
-    .dash-sidebar .dash-container ul.dash-list .dash-item {
+    .dash-sidebar .dash-sidebar-container ul.dash-list .dash-item {
       margin-bottom: 0; }
-      .dash-sidebar .dash-container ul.dash-list .dash-item div {
+      .dash-sidebar .dash-sidebar-container ul.dash-list .dash-item div {
         text-align: center;
         padding: 1.6rem;
         font-size: 1.6rem;
         line-height: 3.2rem; }
-        .dash-sidebar .dash-container ul.dash-list .dash-item div:hover {
-          background-color: #000000; }
+        .dash-sidebar .dash-sidebar-container ul.dash-list .dash-item div:hover {
+          background-color: #111111; }
+
+.dash-container .title {
+  background-color: #239687;
+  color: #FAFAFF;
+  line-height: 8rem;
+  font-size: 2.4rem;
+  padding: 0 16px;
+  box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.5); }
+
+.dash-container .content {
+  padding: 16px;
+  box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5); }
+  .dash-container .content .list {
+    list-style: none;
+    margin-bottom: 0; }
+    .dash-container .content .list .list-item {
+      margin-bottom: 0; }
