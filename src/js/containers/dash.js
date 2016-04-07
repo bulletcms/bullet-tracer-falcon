@@ -34,7 +34,7 @@ class DashPages extends React.Component {
     const title = this.refs.newpagetitle.value;
     const path = this.refs.newpagepath.value;
     const page = this.refs.newpage.value;
-    if(newpagetitle.length < 1 || newpagepath.length < 1 || newpage.length < 1){
+    if(title.length < 1 || path.length < 1 || page.length < 1){
       console.log('need values for title, path, and page');
     } else {
       let send = {title, path, content: BulletmarkCompile(page)};
@@ -42,7 +42,7 @@ class DashPages extends React.Component {
       this.refs.newpagetitle.value = '';
       this.refs.newpagepath.value = '';
       this.refs.newpage.value = '';
-      console.log(newpagetitle, newpagepath, newpage);
+      console.log(send);
     }
   }
 

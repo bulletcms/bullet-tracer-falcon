@@ -7,10 +7,18 @@ const BulletmarkRender = (viewjson, views)=>{
     if(views[i.component]){
       const dynamiccomponent = views[i.component];
       let children = '';
-      if(i.children.length > 0){
-        children = BulletmarkRender(i.children, views);
+      let config = {};
+      if(i.children && i.children.length > 0){
+        if(typeof i.children == 'string'){
+          children = i.children;
+        } else {
+          children = BulletmarkRender(i.children, views);
+        }
       }
-      viewtree.push(<dynamiccomponent key={k} config={i.config}>{children}</dynamiccomponent>);
+      if(i.config){
+        config = i.config;
+      }
+      viewtree.push(<dynamiccomponent key={k} config={config}>{children}</dynamiccomponent>);
     }
     k++;
   }
@@ -18,9 +26,32 @@ const BulletmarkRender = (viewjson, views)=>{
   return viewtree;
 };
 
+const headerparse = (text)=>{
+  const split = text.indexOf(' ');
+  const component = 'h' + split;
+  const children = text.substring(split + 1);
+  return {component, children};
+}
+
+const componentparse = (text)=>{
+  const newtext = text.substring(1, text.length-1);
+  const [component, configtext] = newtext.split('|').map((text)=>{return text.trim();});
+  const configarray = configtext.split().map((text)=>{return text.split('=')});
+  let config = {};
+  for(let i of configarray){
+    config[i[0]] = i[1];
+  }
+
+  return {component, config};
+}
+
+const paragraphparse = (text)=>{
+  return {component: 'p', children: text};
+}
+
 const BulletmarkCompile = (bulletmark)=>{
-  // bulletmark : toml like markup with markdown support; views : set of supported components;
-  let viewjson = {};
+  // bulletmark : markdown;
+  let viewjson = [];
 
   /*
     # heading 1
@@ -45,10 +76,12 @@ const BulletmarkCompile = (bulletmark)=>{
     i am also the start of the third paragraph.
     i am not a fourth paragraph but instead the second sentence of the third.
 
+    **quotes not implemented for now**
     > I am a quote.
     >
     > I am another paragraph in this quote.
 
+    **not implemented**
     - this
     - is
     - a
@@ -78,6 +111,22 @@ const BulletmarkCompile = (bulletmark)=>{
   */
 
   let components = bulletmark.split('\n');
+
+  for(let i of components){
+    if(i.length > 0){
+      const firstchar = i.charAt(0);
+      switch(firstchar) {
+        case '#':
+          viewjson.push(headerparse(i));
+          break;
+        case '{': //}
+          viewjson.push(componentparse(i));
+          break;
+        default:
+          viewjson.push(paragraphparse(i));
+      }
+    }
+  }
 
   return viewjson;
 };
