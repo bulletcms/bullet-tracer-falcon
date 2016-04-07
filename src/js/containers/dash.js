@@ -32,12 +32,16 @@ class DashAuth extends React.Component {
 class DashPages extends React.Component {
   handleAddPage(){
     const newpagetitle = this.refs.newpagetitle.value;
-    this.refs.newpagetitle.value = '';
     const newpagepath = this.refs.newpagepath.value;
-    this.refs.newpagepath.value = '';
     const newpage = this.refs.newpage.value;
-    this.refs.newpage.value = '';
-    console.log(newpagetitle, newpagepath, newpage);
+    if(newpagetitle.length < 1 || newpagepath.length < 1 || newpage.length < 1){
+      console.log('need values for title, path, and page');
+    } else {
+      this.refs.newpagetitle.value = '';
+      this.refs.newpagepath.value = '';
+      this.refs.newpage.value = '';
+      console.log(newpagetitle, newpagepath, newpage);
+    }
   }
 
   render(){
