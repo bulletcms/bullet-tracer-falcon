@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {Services, Actions} from '../controllers';
 import Immutable from 'immutable';
 
+const {BulletmarkCompile} = Services;
+
 class DashIndex extends React.Component {
   render(){
     return <div>
@@ -36,8 +38,11 @@ class DashPages extends React.Component {
       <div className="content">
         <div className="container">
           <h4>New Page</h4>
-          <input id="newpagetitle" className="editortitle" placeholder="Page Title"/><br/>
-          <textarea id="newpage" className="editor" cols="80" placeholder="Page Content"></textarea><br/>
+          <input id="newpagetitle" className="editortitle" placeholder="Page Title"/>
+          <input id="newpagepath" className="editorpath" placeholder="Page Path"/>
+          <br/>
+          <textarea id="newpage" className="editor" cols="80" placeholder="Page Content"></textarea>
+          <br/>
           <button className="button">Add Page</button>
           <hr/>
           <h4>Pages</h4>
