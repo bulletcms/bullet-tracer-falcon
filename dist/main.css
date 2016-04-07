@@ -448,9 +448,11 @@ there.
   height: 6.4rem; }
 
 .nav .nav-container {
+  z-index: 64;
   position: static;
   height: 6.4rem;
-  width: 100%; }
+  width: 100%;
+  background-color: rgba(250, 250, 255, 0.85); }
   .nav .nav-container .nav-list {
     list-style: none;
     margin: 0; }
@@ -514,9 +516,19 @@ there.
 
 .dash-container .content {
   padding: 16px;
-  box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5); }
+  box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5);
+  background-color: #FAFAFF; }
   .dash-container .content .list {
     list-style: none;
     margin-bottom: 0; }
     .dash-container .content .list .list-item {
-      margin-bottom: 0; }
+      margin-bottom: 0;
+      padding: 8px; }
+      .dash-container .content .list .list-item .options {
+        float: right;
+        list-style: none;
+        margin: 0; }
+        .dash-container .content .list .list-item .options .option {
+          display: inline-block;
+          margin: 0 1.2rem 0 0;
+          padding: 0.2rem; }

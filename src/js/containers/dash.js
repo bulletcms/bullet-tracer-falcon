@@ -34,10 +34,37 @@ class DashPages extends React.Component {
         <span>Pages</span>
       </div>
       <div className="content">
-        <ul className="list">
-          <li className="list-item">hello</li>
-          <li className="list-item">world</li>
-        </ul>
+        <div className="container">
+          <h4>New Page</h4>
+          <input id="newpagetitle" className="editortitle" placeholder="Page Title"/><br/>
+          <textarea id="newpage" className="editor" cols="80" placeholder="Page Content"></textarea><br/>
+          <button className="button">Add Page</button>
+          <hr/>
+          <h4>Pages</h4>
+          <ul className="list">
+            <li className="list-item">
+              <div>
+                <span className="name">i am a page</span>
+                <ul className="options">
+                  <li className="option">option 1</li>
+                  <li className="option">option 2</li>
+                  <li className="option">option 3</li>
+                </ul>
+              </div>
+            </li>
+            <li className="list-item">
+              <div>
+                <span className="name">i am a page</span>
+                <ul className="options">
+                  <li className="option">option 1</li>
+                  <li className="option">option 2</li>
+                  <li className="option">option 3</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <hr/>
+        </div>
       </div>
     </div>;
   }

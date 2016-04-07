@@ -398,9 +398,11 @@ $height: 6.4rem;
   }
 
   .nav-container {
+    z-index: 64;
     position: static;
     height: $height;
     width: 100%;
+    background-color: rgba(250, 250, 255, 0.85);
 
     .nav-list {
       list-style: none;

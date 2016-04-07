@@ -70,6 +70,7 @@ $titlebarheight: 8.0rem;
   .content {
     padding: 16px;
     box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5);
+    background-color: $colorlight;
 
     .list {
       list-style: none;
@@ -77,7 +78,29 @@ $titlebarheight: 8.0rem;
 
       .list-item {
         margin-bottom: 0;
+        padding: 8px;
+
+        .name {
+
+        }
+        .options {
+          float: right;
+          list-style: none;
+          margin: 0;
+
+          .option {
+            display: inline-block;
+            margin: 0 1.2rem 0 0;
+            padding: 0.2rem;
+          }
+        }
       }
+    }
+    .editortitle {
+
+    }
+    .editor {
+
     }
   }
 }
