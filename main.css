@@ -1,42 +1,5 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-/* Dashboard
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-/* Sidebar
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.dash-sidebar {
-  background-color: #222222;
-  color: #FAFAFF; }
-  .dash-sidebar a {
-    text-decoration: none;
-    color: inherit; }
-    .dash-sidebar a:hover {
-      color: #AAFAFF; }
-  .dash-sidebar .dash-title {
-    text-align: center;
-    line-height: 8rem;
-    font-size: 2.4rem; }
-  .dash-sidebar .dash-container ul.dash-list {
-    list-style: none;
-    margin-bottom: 0; }
-    .dash-sidebar .dash-container ul.dash-list .dash-item {
-      margin-bottom: 0; }
-      .dash-sidebar .dash-container ul.dash-list .dash-item div {
-        text-align: center;
-        padding: 1.6rem;
-        font-size: 1.6rem;
-        line-height: 3.2rem; }
-        .dash-sidebar .dash-container ul.dash-list .dash-item div:hover {
-          background-color: #000000; }
-
-/*
-* Skeleton V2.0.4
-* Copyright 2014, Dave Gamache
-* www.getskeleton.com
-* Free to use under the MIT license.
-* http://www.opensource.org/licenses/mit-license.php
-* 12/29/2014
-*/
 /* Table of contents
 ––––––––––––––––––––––––––––––––––––––––––––––––––
 - Grid
@@ -52,6 +15,7 @@
 - Utilities
 - Clearing
 - Media Queries
+- Nav *new*
 */
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -510,3 +474,32 @@ there.
   position: fixed;
   top: 0;
   left: 0; }
+
+/* Dashboard
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Sidebar
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.dash-sidebar {
+  background-color: #222222;
+  color: #FAFAFF; }
+  .dash-sidebar a {
+    text-decoration: none;
+    color: inherit; }
+    .dash-sidebar a:hover {
+      color: #AAFAFF; }
+  .dash-sidebar .dash-title {
+    text-align: center;
+    line-height: 8rem;
+    font-size: 2.4rem; }
+  .dash-sidebar .dash-container ul.dash-list {
+    list-style: none;
+    margin-bottom: 0; }
+    .dash-sidebar .dash-container ul.dash-list .dash-item {
+      margin-bottom: 0; }
+      .dash-sidebar .dash-container ul.dash-list .dash-item div {
+        text-align: center;
+        padding: 1.6rem;
+        font-size: 1.6rem;
+        line-height: 3.2rem; }
+        .dash-sidebar .dash-container ul.dash-list .dash-item div:hover {
+          background-color: #000000; }
