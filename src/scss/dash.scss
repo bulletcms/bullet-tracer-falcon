@@ -1,0 +1,45 @@
+/* Dashboard
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Sidebar
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.dash-sidebar {
+  background-color: #222222;
+  color: #FAFAFF;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: #AAFAFF;
+    }
+  }
+
+  .dash-title {
+    text-align: center;
+    line-height: 8rem;
+    font-size: 2.4rem;
+  }
+
+  .dash-container {
+    ul.dash-list {
+      list-style: none;
+      margin-bottom: 0;
+
+      .dash-item {
+        margin-bottom: 0;
+
+        div {
+          text-align: center;
+          padding: 1.6rem;
+          font-size: 1.6rem;
+          line-height: 3.2rem;
+          &:hover {
+            background-color: #000000;
+          }
+        }
+      }
+    }
+  }
+}

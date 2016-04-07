@@ -15,3 +15,7 @@
   - [ ] gulp-imagemin
 - [ ] style
   - [ ] refactor scss into config and main
+- [ ] dashboard
+  - [ ] authentication manager
+  - [ ] pages editor
+  - [ ] blog post editor
