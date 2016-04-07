@@ -5,7 +5,8 @@ const BulletmarkRender = (viewjson, views)=>{
   for(let i of viewjson){
     let k;
     if(views[i.component]){
-      viewtree.push(views[i.component]);
+      const dynamiccomponent = views[i.component];
+      viewtree.push(<dynamiccomponent config={i.config}>{i.children}</dynamiccomponent>);
     } else {
       viewtree.push('');
     }
@@ -14,7 +15,7 @@ const BulletmarkRender = (viewjson, views)=>{
   return viewtree;
 };
 
-const BulletmarkCompile = (bulletmark, views)=>{
+const BulletmarkCompile = (bulletmark)=>{
   // bulletmark : toml like markup with markdown support; views : set of supported components;
   let viewjson = {};
 
@@ -56,9 +57,9 @@ const BulletmarkCompile = (bulletmark, views)=>{
     + ordered
     + list
 
-    '''
+    ```
     i am some block code
-    '''
+    ```
 
     this is some `inline code`
 
