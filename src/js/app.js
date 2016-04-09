@@ -13,9 +13,9 @@ const {DoesNotExist, Page, Dash} = Containers;
 class App extends React.Component {
   static route(){
     return <Route path='/' component={App}>
-      {Page.indexroute(CONFIG.pages.home)}
-      {Page.route(CONFIG.pages.about)}
+      {Page.indexroute(home)}
       {Dash.route(CONFIG.dash)}
+      {Page.route('p')}
       {DoesNotExist.route()}
     </Route>;
   }

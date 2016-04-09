@@ -7,27 +7,28 @@ const {PageFetchActions: fetchPage} = Actions;
 const {BulletmarkRender} = Services;
 
 class Page extends React.Component {
-  static route(routeconfig){
+  static route(prefix=''){
     //routeconfig must contain: path, format (currently only bullet json), filename (text file to parse)
-    return <Route path={routeconfig.path} config={routeconfig} component={Page}/>;
+    return <Route path={prefix + '/:pagepath'} component={Page}/>;
   }
 
-  static indexroute(routeconfig){
-    return <IndexRoute config={routeconfig} component={Page}/>;
+  static indexroute(indexpagepath){
+    return <IndexRoute page={indexpagepath} component={Page}/>;
   }
 
   render(){
-    const {path, format, filename} = this.props.route.config;
+    const {content} = this.props;
     return <div className="container">
-      This is {filename}.
+      This is a page.
     </div>;
   }
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state, props)=>{
   const {PageFetchReducer} = state;
   return {
-    content: PageFetchReducer.getIn(['pages', PageFetchReducer.get('page'), 'content'])
+    content: PageFetchReducer.getIn(['pages', props.params.pagepath, 'content']),
+    page: props.params.pagepath
   };
 };
 

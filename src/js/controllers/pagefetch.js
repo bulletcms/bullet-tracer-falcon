@@ -51,11 +51,10 @@ const PageFetchActions = {fetchPage};
 const defaultState = Immutable.fromJS({pages: {}, page: '', standardupdatetime: 512});
 
 const UpdatePage = (state=defaultState, page, content, force=false)=>{
-  let nextState = state;
   if(force || !(state.getIn(['pages', page])) || Math.floor(Date.now() / 1000) - state.getIn(['pages', page, 'updatetime']) > state.getIn(['standardupdatetime'])){
-    nextState = state.setIn(['pages', page], Immutable.fromJS({content: Immutable.fromJS(content), fetching: false, updatetime: Math.floor(Date.now() / 1000)}));
+    return state.setIn(['pages', page], Immutable.fromJS({content: Immutable.fromJS(content), fetching: false, updatetime: Math.floor(Date.now() / 1000)}));
   }
-  return nextState.set('page', page);
+  return state;
 };
 
 const PageFetchReducer = (state=defaultState, action)=>{
