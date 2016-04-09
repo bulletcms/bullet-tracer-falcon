@@ -8,7 +8,6 @@ const {BulletmarkRender} = Services;
 
 class Page extends React.Component {
   static route(prefix=''){
-    //routeconfig must contain: path, format (currently only bullet json), filename (text file to parse)
     return <Route path={prefix + '/:pagepath'} component={Page}/>;
   }
 
