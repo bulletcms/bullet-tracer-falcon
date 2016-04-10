@@ -19,3 +19,5 @@
   - [ ] authentication manager
   - [ ] pages editor
   - [ ] blog post editor
+- [ ] refactor page system
+  - [ ] write out state
