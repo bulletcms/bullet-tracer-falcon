@@ -57,13 +57,24 @@ const UpdatePage = (state=defaultState, page, content, force=false)=>{
   return state;
 };
 
+const ReducePageFetching = (state=defaultState, page)=>{
+  return state.setIn(['pages', page], Immutable.fromJS({fetching: true}));
+}
+
+const ResetPageFetching = (state=defaultState, page)=>{
+  return state.setIn(['pages', page], Immutable.fromJS({fetching: false}));
+}
+
 const PageFetchReducer = (state=defaultState, action)=>{
   switch (action.type) {
     case RECEIVE_PAGE:
-      return UpdatePage(state, action.url, action.page, action.content);
+      return UpdatePage(state, action.page, action.content);
     case RECEIVE_PAGE_FAILED:
+      return ResetPageFetching(state, action.page);
     case FETCH_PAGE:
+      break;
     case FETCHING_PAGE:
+      return ReducePageFetching(state, action.page);
     default:
       return state;
   }
