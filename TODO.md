@@ -21,3 +21,9 @@
   - [ ] blog post editor
 - [ ] refactor page system
   - [ ] write out state
+- [ ] new app boot process
+   - [ ] first pagelistfetch
+   - [ ] page state has list of accessible pages from pagelistfetch
+   - [ ] page can get pages based on route
+   - [ ] page fetch services
+   - [ ] page renderer must use react create element
