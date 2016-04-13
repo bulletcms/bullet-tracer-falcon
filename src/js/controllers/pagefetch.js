@@ -1,6 +1,38 @@
 import fetch from 'whatwg-fetch';
 import Immutable from 'immutable';
 
+/* Page list
+------------------------------------------*/
+const FETCH_PAGELIST = Symbol('FETCH_PAGELIST');
+const FETCHING_PAGELIST = Symbol('FETCHING_PAGELIST');
+const RECEIVE_PAGELIST = Symbol('RECEIVE_PAGELIST');
+const ERR_PAGELIST = Symbol('ERR_PAGELIST');
+
+const fetchingPagelist = ()=>{
+  return {
+    type: FETCHING_PAGELIST
+  };
+}
+
+const receivePagelist = (json)=>{
+  return {
+    type: RECEIVE_PAGELIST,
+    pagelist: json
+  };
+};
+
+const errPagelist = (err)=>{
+  return {
+    type: ERR_PAGELIST,
+    err: err
+  };
+};
+
+const fetchPagelist = (url)=>{
+
+};
+
+
 const FETCH_PAGE = Symbol('FETCH_PAGE');
 const FETCHING_PAGE = Symbol('FETCHING_PAGE');
 const RECEIVE_PAGE = Symbol('RECEIVE_PAGE');
