@@ -70,6 +70,8 @@ const fetchPagelist = (url)=>{
         }).catch((err)=>{
           dispatch(errPagelist(err));
         });
+    } else {
+      return Promise.resolve();
     }
   };
 };
@@ -122,6 +124,8 @@ const fetchPage = (base, url)=>{
         }).catch((err)=>{
           dispatch(errPage(url, err));
         });
+    } else {
+      return Promise.resolve();
     }
   };
 };
