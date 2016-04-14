@@ -1,8 +1,8 @@
 import {BulletmarkRender, BulletmarkCompile} from './bulletmark';
-import {PageFetchActions, PageFetchReducer} from './pagefetch';
+import pagefetch from './pagefetch';
 
 const Services = {BulletmarkRender, BulletmarkCompile};
-const Actions = {PageFetchActions};
-const Reducers = {PageFetchReducer};
+const Actions = {...(pagefetch.Actions)};
+const Reducers = {...(pagefetch.Reducers)};
 
 export {Services, Actions, Reducers};

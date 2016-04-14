@@ -3,6 +3,29 @@ import Immutable from 'immutable';
 import {timeNow} from '../util';
 
 
+/* App state
+------------------------------------------*/
+const defaultState = Immutable.fromJS({
+  fetchingPagelist: false,
+  pagelist: Immutable.Set.of('indexroute'),
+  pagelistUpdatetime: 0,
+  pages: Immutable.Map({})
+});
+
+
+/* State services
+------------------------------------------*/
+const MIN_UPDATE_TIME = 256;
+
+const shouldUpdatePagelist = (state)=>{
+  return !(state.get('fetchingPagelist')) && (timeNow() - state.get('pagelistUpdatetime') > MIN_UPDATE_TIME);
+};
+
+const shouldUpdatePage = (state, page)=>{
+  return !(state.getIn(['pages', page])) || !(state.getIn(['pages', page, 'fetching'])) && (timeNow() - state.getIn(['pages', page, 'updatetime']) > MIN_UPDATE_TIME);
+};
+
+
 /* Page list
 ------------------------------------------*/
 
@@ -34,7 +57,10 @@ const errPagelist = (err)=>{
 };
 
 const fetchPagelist = (url)=>{
-  return (dispatch)=>{
+  return (dispatch, getState)=>{
+    if(shouldUpdatePagelist(getState())){
+      //fetchpage
+    }
     dispatch(fetchingPagelist());
 
     return fetch(url)
@@ -84,42 +110,21 @@ const errPage = (url, err)=>{
 };
 
 const fetchPage = (base, url)=>{
-  return (dispatch)=>{
-    dispatch(fetchingPage(url));
+  return (dispatch, getState)=>{
+    if(shouldUpdatePage(getState(), action.page)){
+      dispatch(fetchingPage(url));
 
-    fetch(base+'/'+url)
-      .then((res)=>{
-        return res.json();
-      })
-      .then((json)=>{
-        dispatch(receivePage(url, json))
-      }).catch((err)=>{
-        dispatch(errPage(url, err));
-      });
+      return fetch(base+'/'+url)
+        .then((res)=>{
+          return res.json();
+        })
+        .then((json)=>{
+          dispatch(receivePage(url, json))
+        }).catch((err)=>{
+          dispatch(errPage(url, err));
+        });
+    }
   };
-};
-
-
-/* App state
-------------------------------------------*/
-const defaultState = Immutable.fromJS({
-  fetchingPagelist: false,
-  pagelist: Immutable.Set.of('indexroute'),
-  pagelistUpdatetime: 0,
-  pages: Immutable.Map({})
-});
-
-
-/* State services
-------------------------------------------*/
-const MIN_UPDATE_TIME = 256;
-
-const shouldUpdatePagelist = (state)=>{
-  return !(state.get('fetchingPagelist')) && (timeNow() - state.get('pagelistUpdatetime') > MIN_UPDATE_TIME);
-};
-
-const shouldUpdatePage = (state, page)=>{
-  return !(state.getIn(['pages', page])) || !(state.getIn(['pages', page, 'fetching'])) && (timeNow() - state.getIn(['pages', page, 'updatetime']) > MIN_UPDATE_TIME);
 };
 
 
@@ -128,9 +133,6 @@ const shouldUpdatePage = (state, page)=>{
 const reducePage = (state=defaultState, action)=>{
   switch (action.type) {
     case FETCH_PAGELIST:
-      if(shouldUpdatePagelist(state)){
-        //fetchpage
-      }
       return state;
     case FETCHING_PAGELIST:
       return state.set('fetchingPagelist', true);
@@ -142,9 +144,6 @@ const reducePage = (state=defaultState, action)=>{
       console.log('err pagelist', action.err);
       return state.set('fetchingPagelist', false);
     case FETCH_PAGE:
-      if(shouldUpdatePage(state, action.page)){
-        //fetchpage
-      }
       return state;
     case FETCHING_PAGE:
       return state.setIn(['pages', action.page, 'fetching'], true);
@@ -161,4 +160,7 @@ const reducePage = (state=defaultState, action)=>{
 };
 
 
-export {};
+const Actions = {fetchPagelist, fetchPage};
+const Reducers = {reducePage};
+
+export {Actions, Reducers};
