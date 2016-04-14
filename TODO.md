@@ -13,17 +13,17 @@
     - [ ] possibly reactdomserver.rendertostaticmarkup
 - [ ] performance
   - [ ] gulp-imagemin
-- [ ] style
-  - [ ] refactor scss into config and main
+- [x] style
+  - [x] refactor scss into config and main
 - [ ] dashboard
   - [ ] authentication manager
   - [ ] pages editor
   - [ ] blog post editor
-- [ ] refactor page system
-  - [ ] write out state
+- [x] refactor page system
+  - [x] write out state
 - [ ] new app boot process
    - [ ] first pagelistfetch
    - [ ] page state has list of accessible pages from pagelistfetch
    - [ ] page can get pages based on route
-   - [ ] page fetch services
+   - [x] page fetch services
    - [ ] page renderer must use react create element
