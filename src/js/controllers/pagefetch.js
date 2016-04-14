@@ -3,16 +3,6 @@ import Immutable from 'immutable';
 import {timeNow} from '../util';
 
 
-/* App state
-------------------------------------------*/
-const defaultState = Immutable.fromJS({
-  fetchingPagelist: false,
-  pagelist: Immutable.Set.of('indexroute'),
-  pagelistUpdatetime: 0,
-  pages: Immutable.Map({})
-});
-
-
 /* Page list
 ------------------------------------------*/
 
@@ -57,25 +47,6 @@ const fetchPagelist = (url)=>{
         dispatch(errPagelist(err));
       });
   };
-};
-
-// REDUCER
-const reducePagelist = (state=defaultState, action)=>{
-  switch(action.type){
-    case FETCH_PAGELIST:
-      return state;
-    case FETCHING_PAGELIST:
-      return state.set('fetchingPagelist', true);
-    case RECEIVE_PAGELIST:
-      return state.updateIn(['pagelist'], (list)=>{return list.union(action.pagelist.data);})
-        .set('fetchingPagelist', false)
-        .set('pagelistUpdatetime', timeNow());
-    case ERR_PAGELIST:
-      console.log('err pagelist', action.err);
-      return state.set('fetchingPagelist', false);
-    default:
-      return state;
-  }
 };
 
 
@@ -128,10 +99,52 @@ const fetchPage = (base, url)=>{
   };
 };
 
-// REDUCER
+
+/* App state
+------------------------------------------*/
+const defaultState = Immutable.fromJS({
+  fetchingPagelist: false,
+  pagelist: Immutable.Set.of('indexroute'),
+  pagelistUpdatetime: 0,
+  pages: Immutable.Map({})
+});
+
+
+/* State services
+------------------------------------------*/
+const MIN_UPDATE_TIME = 256;
+
+const shouldUpdatePagelist = (state)=>{
+  return !(state.get('fetchingPagelist')) && (timeNow() - state.get('pagelistUpdatetime') > MIN_UPDATE_TIME);
+};
+
+const shouldUpdatePage = (state, page)=>{
+  return !(state.getIn(['pages', page])) || !(state.getIn(['pages', page, 'fetching'])) && (timeNow() - state.getIn(['pages', page, 'updatetime']) > MIN_UPDATE_TIME);
+};
+
+
+/* Reducer
+------------------------------------------*/
 const reducePage = (state=defaultState, action)=>{
   switch (action.type) {
+    case FETCH_PAGELIST:
+      if(shouldUpdatePagelist(state)){
+        //fetchpage
+      }
+      return state;
+    case FETCHING_PAGELIST:
+      return state.set('fetchingPagelist', true);
+    case RECEIVE_PAGELIST:
+      return state.updateIn(['pagelist'], (list)=>{return list.union(action.pagelist.data);})
+        .set('fetchingPagelist', false)
+        .set('pagelistUpdatetime', timeNow());
+    case ERR_PAGELIST:
+      console.log('err pagelist', action.err);
+      return state.set('fetchingPagelist', false);
     case FETCH_PAGE:
+      if(shouldUpdatePage(state, action.page)){
+        //fetchpage
+      }
       return state;
     case FETCHING_PAGE:
       return state.setIn(['pages', action.page, 'fetching'], true);
@@ -146,11 +159,6 @@ const reducePage = (state=defaultState, action)=>{
       return state;
   }
 };
-
-
-/* State services
-------------------------------------------*/
-
 
 
 export {};
