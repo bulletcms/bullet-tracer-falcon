@@ -11,4 +11,8 @@ const hashCode = (theString)=>{
   return hash;
 };
 
-export {hashCode};
+const timeNow = ()=>{
+  return Math.floor(Date.now() / 1000);
+};
+
+export {hashCode, timeNow};

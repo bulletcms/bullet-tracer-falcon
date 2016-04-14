@@ -1,18 +1,33 @@
 import fetch from 'whatwg-fetch';
 import Immutable from 'immutable';
+import {timeNow} from '../util';
+
+
+/* App state
+------------------------------------------*/
+const defaultState = Immutable.fromJS({
+  fetchingPagelist: false,
+  pagelist: Immutable.Set.of('indexroute'),
+  pagelistUpdatetime: 0,
+  pages: Immutable.Map({})
+});
+
 
 /* Page list
 ------------------------------------------*/
+
+// SYMBOLS
 const FETCH_PAGELIST = Symbol('FETCH_PAGELIST');
 const FETCHING_PAGELIST = Symbol('FETCHING_PAGELIST');
 const RECEIVE_PAGELIST = Symbol('RECEIVE_PAGELIST');
 const ERR_PAGELIST = Symbol('ERR_PAGELIST');
 
+// ACTION CREATORS
 const fetchingPagelist = ()=>{
   return {
     type: FETCHING_PAGELIST
   };
-}
+};
 
 const receivePagelist = (json)=>{
   return {
@@ -29,15 +44,51 @@ const errPagelist = (err)=>{
 };
 
 const fetchPagelist = (url)=>{
+  return (dispatch)=>{
+    dispatch(fetchingPagelist());
 
+    return fetch(url)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((json)=>{
+        dispatch(receivePagelist(json));
+      }).catch((err)=>{
+        dispatch(errPagelist(err));
+      });
+  };
+};
+
+// REDUCER
+const reducePagelist = (state=defaultState, action)=>{
+  switch(action.type){
+    case FETCH_PAGELIST:
+      return state;
+    case FETCHING_PAGELIST:
+      return state.set('fetchingPagelist', true);
+    case RECEIVE_PAGELIST:
+      return state.updateIn(['pagelist'], (list)=>{return list.union(action.pagelist.data);})
+        .set('fetchingPagelist', false)
+        .set('pagelistUpdatetime', timeNow());
+    case ERR_PAGELIST:
+      console.log('err pagelist', action.err);
+      return state.set('fetchingPagelist', false);
+    default:
+      return state;
+  }
 };
 
 
+/* Pages
+------------------------------------------*/
+
+//SYMBOLS
 const FETCH_PAGE = Symbol('FETCH_PAGE');
 const FETCHING_PAGE = Symbol('FETCHING_PAGE');
 const RECEIVE_PAGE = Symbol('RECEIVE_PAGE');
-const RECEIVE_PAGE_FAILED = Symbol('RECEIVE_PAGE_FAILED');
+const ERR_PAGE = Symbol('ERR_PAGE');
 
+// ACTION CREATORS
 const fetchingPage = (url)=>{
   return {
     type: FETCHING_PAGE,
@@ -53,63 +104,53 @@ const receivePage = (url, json)=>{
   };
 };
 
-const receivePageFailed = (url, err)=>{
+const errPage = (url, err)=>{
   return {
-    type: RECEIVE_PAGE_FAILED,
+    type: ERR_PAGE,
     page: url,
     error: err
   };
-}
+};
 
 const fetchPage = (base, url)=>{
   return (dispatch)=>{
     dispatch(fetchingPage(url));
 
-    fetch(base+url)
+    fetch(base+'/'+url)
       .then((res)=>{
         return res.json();
       })
       .then((json)=>{
         dispatch(receivePage(url, json))
       }).catch((err)=>{
-        dispatch(receivePageFailed(url, err));
+        dispatch(errPage(url, err));
       });
   };
 };
 
-const PageFetchActions = {fetchPage};
-
-// update time is in sec
-const defaultState = Immutable.fromJS({pages: {}, page: '', standardupdatetime: 512});
-
-const UpdatePage = (state=defaultState, page, content, force=false)=>{
-  if(force || !(state.getIn(['pages', page])) || Math.floor(Date.now() / 1000) - state.getIn(['pages', page, 'updatetime']) > state.getIn(['standardupdatetime'])){
-    return state.setIn(['pages', page], Immutable.fromJS({content: Immutable.fromJS(content), fetching: false, updatetime: Math.floor(Date.now() / 1000)}));
-  }
-  return state;
-};
-
-const ReducePageFetching = (state=defaultState, page)=>{
-  return state.setIn(['pages', page], Immutable.fromJS({fetching: true}));
-}
-
-const ResetPageFetching = (state=defaultState, page)=>{
-  return state.setIn(['pages', page], Immutable.fromJS({fetching: false}));
-}
-
-const PageFetchReducer = (state=defaultState, action)=>{
+// REDUCER
+const reducePage = (state=defaultState, action)=>{
   switch (action.type) {
-    case RECEIVE_PAGE:
-      return UpdatePage(state, action.page, action.content);
-    case RECEIVE_PAGE_FAILED:
-      return ResetPageFetching(state, action.page);
     case FETCH_PAGE:
-      break;
+      return state;
     case FETCHING_PAGE:
-      return ReducePageFetching(state, action.page);
+      return state.setIn(['pages', action.page, 'fetching'], true);
+    case RECEIVE_PAGE:
+      return state.setIn(['pages', action.page, 'content'], action.content.data)
+        .setIn(['pages', action.page, 'updatetime'], timeNow())
+        .setIn(['pages', action.page, 'fetching'], false);
+    case ERR_PAGE:
+      console.log('err page ' + action.page, action.err);
+      return state.setIn(['pages', action.page, 'fetching'], false);
     default:
       return state;
   }
 };
 
-export {PageFetchActions, PageFetchReducer};
+
+/* State services
+------------------------------------------*/
+
+
+
+export {};
