@@ -20,6 +20,10 @@ class App extends React.Component {
     </Route>;
   }
 
+  componentWillMount(){
+    // call page fetch here
+  }
+
   render(){
     return <div className='app'>
       <Nav config={CONFIG.nav}/>
