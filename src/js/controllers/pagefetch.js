@@ -163,7 +163,7 @@ const reducePage = (state=defaultState, action)=>{
 };
 
 
-const Actions = {fetchPagelist, fetchPage};
-const Reducers = {reducePage};
+const PagefetchActions = {fetchPagelist, fetchPage};
+const PagefetchReducers = {reducePage};
 
-export {Actions, Reducers};
+export {PagefetchActions, PagefetchReducers};

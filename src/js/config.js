@@ -13,17 +13,7 @@ export default {
   },
   pages: {
     base: {
-      filename: 'localhost:5000/api/pages/'
-    },
-    home: {
-      path: 'home',
-      format: 'bulletjson',
-      filename: 'home'
-    },
-    about: {
-      path: 'about',
-      format: 'bulletjson',
-      filename: 'about'
+      filename: 'localhost:5000/api/pages'
     }
   },
   dash: {

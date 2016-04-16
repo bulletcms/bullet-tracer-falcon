@@ -31,4 +31,5 @@ const mapStateToProps = (state, props)=>{
   };
 };
 
-export {Page: connect(mapStateToProps)(Page)};
+Page = connect(mapStateToProps)(Page);
+export {Page};
