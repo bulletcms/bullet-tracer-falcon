@@ -1,7 +1,9 @@
-import {DoesNotExist} from './doesnotexist';
-import {Page} from './page';
-import {Dash} from './dash';
+import {DoesNotExist, DoesNotExistRoute} from './doesnotexist';
+import {Page, PageRoute} from './page';
+import {Dash, DashRoute} from './dash';
 
 const Containers = {DoesNotExist, Page, Dash};
 
-export {Containers};
+const Routes = {DoesNotExistRoute, PageRoute, DashRoute};
+
+export {Containers, Routes};

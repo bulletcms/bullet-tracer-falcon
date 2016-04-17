@@ -102,16 +102,6 @@ class DashBlog extends React.Component {
 }
 
 class Dash extends React.Component {
-  static route(routeconfig){
-    return [<Route key='0' path={routeconfig.path} component={Dash}>
-      <IndexRoute component={DashIndex}/>
-      <Route path='auth' component={DashAuth}/>
-      <Route path='pages' component={DashPages}/>
-      <Route path='blog' component={DashBlog}/>
-    </Route>,
-    <Redirect key='1' from='dash/*' to='dash'/>];
-  }
-
   render(){
     return <div>
       <div className="row">
@@ -135,4 +125,14 @@ class Dash extends React.Component {
   }
 }
 
-export {Dash};
+const DashRoute = (routeconfig) => {
+  return [<Route key='0' path={routeconfig.path} component={Dash}>
+    <IndexRoute component={DashIndex}/>
+    <Route path='auth' component={DashAuth}/>
+    <Route path='pages' component={DashPages}/>
+    <Route path='blog' component={DashBlog}/>
+  </Route>,
+  <Redirect key='1' from='dash/*' to='dash'/>];
+};
+
+export {Dash, DashRoute};

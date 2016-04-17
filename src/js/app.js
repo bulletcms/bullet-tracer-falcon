@@ -5,29 +5,37 @@ import {bindActionCreators} from 'redux';
 
 import {Views} from './views';
 import {Reducers, Actions} from './controllers';
-import {Containers} from './containers';
-
+// import {Containers, Routes} from './containers';
+import {Routes} from './containers';
 import CONFIG from './config';
 
+
 const {Nav, Creator} = Views;
-const {DoesNotExist, Page, Dash} = Containers;
+// const {DoesNotExist, Page, Dash} = Containers;
+const {DoesNotExistRoute, PageRoute, DashRoute} = Routes;
 const {fetchPagelist} = Actions;
 
 
-class App extends React.Component {
-  static route(){
-    // return <Route path='/' component={App}>
-    //   {Page.indexroute('home')}
-    //   {Dash.route(CONFIG.dash)}
-    //   {Page.route('p')}
-    //   {DoesNotExist.route()}
-    // </Route>;
-    return <Route path='/' component={App}>
-      {Dash.route(CONFIG.dash)}
-      {DoesNotExist.route()}
-    </Route>;
+const mapStateToProps = (state)=>{
+  console.log('hello');
+  const {reducePage} = state;
+  let nextProps = {};
+  nextProps.fetching = reducePage.get('fetchingPagelist');
+  if(!nextProps.fetching){
+    nextProps.pagelist = reducePage.get('pagelist').toJS();
+    nextProps.updatetime = reducePage.get('pagelistUpdatetime');
   }
+  console.log('nextProps', nextProps);
+  return nextProps;
+};
 
+const mapDispatchToProps = (dispatch)=>{
+  console.log('hello2');
+  return bindActionCreators({fetchPagelist}, dispatch);
+};
+
+@connect(mapStateToProps, mapDispatchToProps)
+class App extends React.Component {
   componentWillMount(){
     console.log('will mount', this.props, this.props.fetchPagelist);
     // this.props.dispatch(fetchPagelist(CONFIG.pages.base));
@@ -54,23 +62,19 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state)=>{
-  console.log('hello');
-  const {reducePage} = state;
-  let nextProps = {};
-  nextProps.fetching = reducePage.get('fetchingPagelist');
-  if(!nextProps.fetching){
-    nextProps.pagelist = reducePage.get('pagelist').toJS();
-    nextProps.updatetime = reducePage.get('pagelistUpdatetime');
-  }
-  console.log('nextProps', nextProps);
-  return nextProps;
+
+const AppRoute = ()=>{
+  // return <Route path='/' component={App}>
+  //   {PageRoute(null, true, 'home')}
+  //   {DashRoute(CONFIG.dash)}
+  //   {PageRoute('p')}
+  //   {DoesNotExistRoute()}
+  // </Route>;
+  return <Route path='/' component={App}>
+    {DashRoute(CONFIG.dash)}
+    {DoesNotExistRoute()}
+  </Route>;
 };
 
-const mapDispatchToProps = (dispatch)=>{
-  console.log('hello2');
-  return bindActionCreators({fetchPagelist}, dispatch);
-};
 
-export {Reducers};
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export {App, AppRoute, Reducers};

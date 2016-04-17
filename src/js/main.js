@@ -7,8 +7,7 @@ import {Provider} from 'react-redux';
 import {Router, Route, browserHistory} from 'react-router';
 import {syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-router-redux';
 
-import {Reducers} from './app';
-import App from './app';
+import {AppRoute, Reducers} from './app';
 
 const store = createStore(
   combineReducers({
@@ -23,7 +22,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      {App.route()}
+      {AppRoute()}
     </Router>
   </Provider>,
   document.getElementById('mount')
