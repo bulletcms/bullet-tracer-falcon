@@ -68,9 +68,8 @@ const mapStateToProps = (state)=>{
 };
 
 const mapDispatchToProps = (dispatch)=>{
-  return {
-    fetchPagelist: bindActionCreators(fetchPagelist)
-  };
+  console.log('hello2');
+  return bindActionCreators({fetchPagelist}, dispatch);
 };
 
 export {Reducers};
