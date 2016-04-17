@@ -31,5 +31,5 @@ const mapStateToProps = (state, props)=>{
   };
 };
 
-Page = connect(mapStateToProps)(Page);
+connect(mapStateToProps)(Page);
 export {Page};

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import {Views} from './views';
 import {Reducers, Actions} from './controllers';
@@ -28,11 +29,16 @@ class App extends React.Component {
   }
 
   componentWillMount(){
-    console.log(this.props);
-    this.props.dispatch(fetchPagelist(CONFIG.pages.base));
+    console.log('will mount', this.props, this.props.fetchPagelist);
+    // this.props.dispatch(fetchPagelist(CONFIG.pages.base));
+  }
+
+  componentDidMount(){
+    console.log('did mount', this.props);
   }
 
   render(){
+    console.log('render', this.props);
     // return <div className='app'>
     //   <Nav config={CONFIG.nav}/>
     //   {this.props.children}
@@ -48,7 +54,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props)=>{
+const mapStateToProps = (state)=>{
+  console.log('hello');
   const {reducePage} = state;
   let nextProps = {};
   nextProps.fetching = reducePage.get('fetchingPagelist');
@@ -56,8 +63,15 @@ const mapStateToProps = (state, props)=>{
     nextProps.pagelist = reducePage.get('pagelist').toJS();
     nextProps.updatetime = reducePage.get('pagelistUpdatetime');
   }
+  console.log('nextProps', nextProps);
   return nextProps;
 };
 
-App = connect(mapStateToProps)(App);
-export {App, Reducers};
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    fetchPagelist: bindActionCreators(fetchPagelist)
+  };
+};
+
+export {Reducers};
+export default connect(mapStateToProps, mapDispatchToProps)(App)

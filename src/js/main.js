@@ -5,16 +5,17 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {Router, Route, browserHistory} from 'react-router';
-import {syncHistoryWithStore, routerReducer} from 'react-router-redux';
+import {syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-router-redux';
 
-import {App, Reducers} from './app';
+import {Reducers} from './app';
+import App from './app';
 
 const store = createStore(
   combineReducers({
     ...Reducers,
     routing: routerReducer
   }),
-  applyMiddleware(thunkMiddleware)
+  applyMiddleware(thunkMiddleware, routerMiddleware(browserHistory))
 );
 
 const history = syncHistoryWithStore(browserHistory, store);
