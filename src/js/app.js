@@ -17,7 +17,6 @@ const {fetchPagelist} = Actions;
 
 
 const mapStateToProps = (state)=>{
-  console.log('hello');
   const {reducePage} = state;
   let nextProps = {};
   nextProps.fetching = reducePage.get('fetchingPagelist');
@@ -25,28 +24,20 @@ const mapStateToProps = (state)=>{
     nextProps.pagelist = reducePage.get('pagelist').toJS();
     nextProps.updatetime = reducePage.get('pagelistUpdatetime');
   }
-  console.log('nextProps', nextProps);
   return nextProps;
 };
 
 const mapDispatchToProps = (dispatch)=>{
-  console.log('hello2');
   return bindActionCreators({fetchPagelist}, dispatch);
 };
 
-@connect(mapStateToProps, mapDispatchToProps)
+// @connect(mapStateToProps, mapDispatchToProps)
 class App extends React.Component {
   componentWillMount(){
-    console.log('will mount', this.props, this.props.fetchPagelist);
-    // this.props.dispatch(fetchPagelist(CONFIG.pages.base));
-  }
-
-  componentDidMount(){
-    console.log('did mount', this.props);
+    this.props.fetchPagelist(CONFIG.pages.base);
   }
 
   render(){
-    console.log('render', this.props);
     // return <div className='app'>
     //   <Nav config={CONFIG.nav}/>
     //   {this.props.children}
@@ -62,6 +53,7 @@ class App extends React.Component {
   }
 }
 
+App = connect(mapStateToProps, mapDispatchToProps)(App);
 
 const AppRoute = ()=>{
   // return <Route path='/' component={App}>
@@ -69,7 +61,7 @@ const AppRoute = ()=>{
   //   {DashRoute(CONFIG.dash)}
   //   {PageRoute('p')}
   //   {DoesNotExistRoute()}
-  // </Route>;
+  // </Route>;s
   return <Route path='/' component={App}>
     {DashRoute(CONFIG.dash)}
     {DoesNotExistRoute()}
