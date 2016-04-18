@@ -13,7 +13,7 @@ export default {
   },
   pages: {
     base: {
-      filename: 'localhost:5000/api/pages'
+      filename: 'http://localhost:5000/api/pages'
     }
   },
   dash: {
