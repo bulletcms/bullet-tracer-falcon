@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch)=>{
 // @connect(mapStateToProps, mapDispatchToProps)
 class App extends React.Component {
   componentWillMount(){
-    this.props.fetchPagelist(CONFIG.pages.base);
+    this.props.fetchPagelist(CONFIG.pages.base.filename);
   }
 
   render(){
