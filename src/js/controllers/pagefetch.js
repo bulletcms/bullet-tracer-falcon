@@ -1,4 +1,4 @@
-import fetch from 'whatwg-fetch';
+import 'whatwg-fetch';
 import Immutable from 'immutable';
 import {timeNow} from '../util';
 

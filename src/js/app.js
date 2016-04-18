@@ -16,6 +16,8 @@ const {DoesNotExistRoute, PageRoute, DashRoute} = Routes;
 const {fetchPagelist} = Actions;
 
 
+/* Connect Redux
+------------------------------------------*/
 const mapStateToProps = (state)=>{
   const {reducePage} = state;
   let nextProps = {};
@@ -31,6 +33,9 @@ const mapDispatchToProps = (dispatch)=>{
   return bindActionCreators({fetchPagelist}, dispatch);
 };
 
+
+/* App
+------------------------------------------*/
 // @connect(mapStateToProps, mapDispatchToProps)
 class App extends React.Component {
   componentWillMount(){
@@ -55,6 +60,9 @@ class App extends React.Component {
 
 App = connect(mapStateToProps, mapDispatchToProps)(App);
 
+
+/* App Routes
+------------------------------------------*/
 const AppRoute = ()=>{
   // return <Route path='/' component={App}>
   //   {PageRoute(null, true, 'home')}
