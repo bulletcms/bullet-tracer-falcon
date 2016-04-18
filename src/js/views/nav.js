@@ -9,6 +9,8 @@ class Nav extends React.Component {
     super(props);
     this.state = {data: Immutable.Map({isDocked: false})};
     this.updating = false;
+    this.calculateDocked = this.calculateDocked.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   calculateDocked(){
@@ -18,7 +20,7 @@ class Nav extends React.Component {
 
   handleScroll(){
     if(!this.updating){
-      window.requestAnimationFrame(this.calculateDocked.bind(this));
+      window.requestAnimationFrame(this.calculateDocked);
     }
     this.updating = true;
   }
@@ -28,13 +30,11 @@ class Nav extends React.Component {
   }
 
   componentDidMount(){
-    this.scrollListener = this.handleScroll.bind(this);
-
-    window.addEventListener('scroll', this.scrollListener);
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount(){
-    window.removeEventListener('scroll', this.scrollListener);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   render(){

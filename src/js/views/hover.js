@@ -5,6 +5,8 @@ class Hover extends React.Component {
   constructor(props) {
     super(props);
     this.state = {data: Immutable.Map({isHovering: false})};
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
   handleMouseOver(){
@@ -26,7 +28,7 @@ class Hover extends React.Component {
     if(this.state.data.get('isHovering')){
       finalview = hoverview;
     }
-    return <span onMouseOver={this.handleMouseOver.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>{finalview}</span>;
+    return <span onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>{finalview}</span>;
   }
 }
 

@@ -9,6 +9,8 @@ const {PageFetchActions: fetchPage} = Actions;
 const {BulletmarkRender} = Services;
 
 
+/* Connect Redux
+------------------------------------------*/
 const mapStateToProps = (state, props)=>{
   const {PageFetchReducer} = state;
   return {
@@ -17,7 +19,10 @@ const mapStateToProps = (state, props)=>{
   };
 };
 
-@connect(mapStateToProps)
+
+/* Page
+------------------------------------------*/
+// @connect(mapStateToProps)
 class Page extends React.Component {
   render(){
     const {content} = this.props;
@@ -27,7 +32,11 @@ class Page extends React.Component {
   }
 }
 
+Page = connect(mapStateToProps)(Page);
 
+
+/* Page Routes
+------------------------------------------*/
 const PageRoute = (prefix='', index=false, indexpagepath='')=>{
   if(index){
     return <IndexRoute page={indexpagepath} component={Page}/>;
