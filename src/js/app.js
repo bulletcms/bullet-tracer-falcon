@@ -57,13 +57,9 @@ App = connect(mapStateToProps, mapDispatchToProps)(App);
 /* App Routes
 ------------------------------------------*/
 const AppRoute = ()=>{
-  // return <Route path='/' component={App}>
-  //   {PageRoute(null, true, CONFIG.pages.indexroute)}
-  //   {PageRoute('page')}
-  //   {DashRoute(CONFIG.dash)}
-  //   {DoesNotExistRoute()}
-  // </Route>;
   return <Route path='/' component={App}>
+    {PageRoute(null, true, CONFIG.pages.indexroute)}
+    {PageRoute('page')}
     {DashRoute(CONFIG.dash)}
     {DoesNotExistRoute()}
   </Route>;

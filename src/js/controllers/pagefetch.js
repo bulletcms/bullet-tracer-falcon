@@ -18,10 +18,12 @@ const defaultState = Immutable.fromJS({
 const MIN_UPDATE_TIME = 256;
 
 const shouldUpdatePagelist = (state)=>{
+  // should update if: (pagelist is NOT fetching currently) AND (time to last pagelist updatetime is greater than the minimum)
   return !(state.get('fetchingPagelist')) && (timeNow() - state.get('pagelistUpdatetime') > MIN_UPDATE_TIME);
 };
 
 const shouldUpdatePage = (state, page)=>{
+  // should update if: (page does NOT exist) OR (page is NOT fetching currently AND time to last page updatetime is greater than the minimum)
   return !(state.getIn(['pages', page])) || !(state.getIn(['pages', page, 'fetching'])) && (timeNow() - state.getIn(['pages', page, 'updatetime']) > MIN_UPDATE_TIME);
 };
 
@@ -57,6 +59,10 @@ const errPagelist = (err)=>{
 };
 
 const fetchPagelist = (url)=>{
+  if(typeof url != 'string'){
+    console.log('err fetchpagelist: url must be string, url: ', url);
+    return;
+  }
   return (dispatch, getState)=>{
     if(shouldUpdatePagelist(getState().reducePage)){
       dispatch(fetchingPagelist());
@@ -102,27 +108,37 @@ const receivePage = (url, json)=>{
   };
 };
 
-const errPage = (url, err)=>{
+const errPage = (url)=>{
   return {
     type: ERR_PAGE,
-    page: url,
-    error: err
+    page: url
   };
 };
 
 const fetchPage = (base, url)=>{
+  if(typeof base != 'string'){
+    console.log('err fetchpagelist: base must be string, base: ', base);
+    return;
+  }
+  if(typeof url != 'string'){
+    console.log('err fetchpagelist: url must be string, url: ', url);
+    return;
+  }
   return (dispatch, getState)=>{
-    if(shouldUpdatePage(getState().reducePage, action.page)){
+    if(shouldUpdatePage(getState().reducePage, url)){
       dispatch(fetchingPage(url));
-
+      console.log('first');
       return fetch(base+'/'+url)
         .then((res)=>{
+          console.log('res', res);
           return res.json();
         })
         .then((json)=>{
-          dispatch(receivePage(url, json))
+          console.log('json', json);
+          dispatch(receivePage(url, json));
         }).catch((err)=>{
-          dispatch(errPage(url, err));
+          console.log('err', err);
+          dispatch(errPage(url));
         });
     } else {
       return Promise.resolve();
@@ -157,7 +173,6 @@ const reducePage = (state=defaultState, action)=>{
         .setIn(['pages', action.page, 'updatetime'], timeNow())
         .setIn(['pages', action.page, 'fetching'], false);
     case ERR_PAGE:
-      console.log('err page ' + action.page, action.err);
       return state.setIn(['pages', action.page, 'fetching'], false);
     default:
       return state;

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {Services, Actions} from '../controllers';
 import {Views} from '../views';
+import CONFIG from '../config';
 
 
 const {fetchPage} = Actions;
@@ -36,13 +37,13 @@ const mapDispatchToProps = (dispatch)=>{
 // @connect(mapStateToProps)
 class Page extends React.Component {
   componentWillMount(){
-    this.props.fetchPage(CONFIG.api.pages, this.props)
+    this.props.fetchPage(CONFIG.api.pages, this.props.page);
   }
 
   render(){
     const {content} = this.props;
     return <div className="container">
-      {!this.props.fetching && BulletmarkRender(this.props.content, Views)}
+      {this.props.content && BulletmarkRender(this.props.content, Views)}
     </div>;
   }
 };
