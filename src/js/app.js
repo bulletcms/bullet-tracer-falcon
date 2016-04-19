@@ -43,16 +43,9 @@ class App extends React.Component {
   }
 
   render(){
-    // return <div className='app'>
-    //   <Nav config={CONFIG.nav}/>
-    //   {this.props.children}
-    //   <Creator config={CONFIG.creator}/>
-    // </div>;
     return <div className='app'>
       <Nav config={CONFIG.nav}/>
-      {this.props.fetching && <span>fetching</span>}
-      {!this.props.fetching && this.props.pagelist}
-      {!this.props.fetching && this.props.updatetime}
+      {this.props.children}
       <Creator config={CONFIG.creator}/>
     </div>;
   }

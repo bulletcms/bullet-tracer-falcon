@@ -135,6 +135,7 @@ const fetchPage = (base, url)=>{
 ------------------------------------------*/
 const reducePage = (state=defaultState, action)=>{
   switch (action.type) {
+    // Pagelist
     case FETCH_PAGELIST:
       return state;
     case FETCHING_PAGELIST:
@@ -146,6 +147,7 @@ const reducePage = (state=defaultState, action)=>{
     case ERR_PAGELIST:
       console.log('err pagelist', action.err);
       return state.set('fetchingPagelist', false);
+    // Pages
     case FETCH_PAGE:
       return state;
     case FETCHING_PAGE:
