@@ -15,7 +15,7 @@ export default {
     pages: 'http://localhost:5000/api/pages'
   },
   pages: {
-    indexroute: 'home'
+    indexroute: 'indexroute'
   },
   dash: {
     path: 'dash'
