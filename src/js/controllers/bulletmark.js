@@ -157,8 +157,6 @@ const BulletmarkCompile = (bulletmark, paradefault=true)=>{
         default:
           if(paradefault){
             viewjson.push(paragraphparse(i));
-          } else {
-            viewjson.push(i);
           }
       }
     }
@@ -166,6 +164,10 @@ const BulletmarkCompile = (bulletmark, paradefault=true)=>{
 
   // return single element if only one element
   if(viewjson.length < 2){
+    // return plain text if toggled
+    if(!paradefault && viewjson[0].component == 'p'){
+      return viewjson[0].children;
+    }
     return viewjson[0];
   }
 
