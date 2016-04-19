@@ -12,9 +12,10 @@ const {BulletmarkRender} = Services;
 /* Connect Redux
 ------------------------------------------*/
 const mapStateToProps = (state, props)=>{
-  const {PageFetchReducer} = state;
+  const {reducePage} = state;
+  let pagepath = props.params.pagepath || props.route.page;
   return {
-    content: PageFetchReducer.getIn(['pages', props.params.pagepath, 'content']),
+    content: reducePage.getIn(['pages', props.params.pagepath, 'content']),
     page: props.params.pagepath
   };
 };
@@ -30,7 +31,7 @@ class Page extends React.Component {
       This is a page.
     </div>;
   }
-}
+};
 
 Page = connect(mapStateToProps)(Page);
 
@@ -43,7 +44,7 @@ const PageRoute = (prefix='', index=false, indexpagepath='')=>{
   } else {
     return <Route path={prefix + '/:pagepath'} component={Page}/>;
   }
-}
+};
 
 
 export {Page, PageRoute};

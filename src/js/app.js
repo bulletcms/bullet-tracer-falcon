@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch)=>{
 // @connect(mapStateToProps, mapDispatchToProps)
 class App extends React.Component {
   componentWillMount(){
-    this.props.fetchPagelist(CONFIG.pages.base.filename);
+    this.props.fetchPagelist(CONFIG.api.pages);
   }
 
   render(){
@@ -58,11 +58,11 @@ App = connect(mapStateToProps, mapDispatchToProps)(App);
 ------------------------------------------*/
 const AppRoute = ()=>{
   // return <Route path='/' component={App}>
-  //   {PageRoute(null, true, 'home')}
+  //   {PageRoute(null, true, CONFIG.pages.indexroute)}
+  //   {PageRoute('page')}
   //   {DashRoute(CONFIG.dash)}
-  //   {PageRoute('p')}
   //   {DoesNotExistRoute()}
-  // </Route>;s
+  // </Route>;
   return <Route path='/' component={App}>
     {DashRoute(CONFIG.dash)}
     {DoesNotExistRoute()}

@@ -11,10 +11,11 @@ export default {
       names: ['xorkevin'],
       copyright: 2015
   },
+  api: {
+    pages: 'http://localhost:5000/api/pages'
+  },
   pages: {
-    base: {
-      filename: 'http://localhost:5000/api/pages'
-    }
+    indexroute: 'home'
   },
   dash: {
     path: 'dash'
