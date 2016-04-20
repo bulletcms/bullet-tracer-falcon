@@ -1,4 +1,5 @@
 import React from 'react';
+import {hashCode} from '../util';
 
 
 /* React DOM list
@@ -33,7 +34,6 @@ const BulletmarkRender = (viewjson, views={})=>{
   // viewjson is bulletmark JSON
   let viewtree = [];
 
-  let k=0; // for keys in react
   for(let i of j){
     let isValid = false;
     let componentname = null;
@@ -47,10 +47,10 @@ const BulletmarkRender = (viewjson, views={})=>{
 
     if(isValid){
       let componentprops = {
-        key: k
+        key: hashCode(JSON.stringify(i))
       };
       let componentchildren = null;
-      
+
       if(i.props){
         Object.assign(componentprops, i.props);
       }
@@ -59,7 +59,6 @@ const BulletmarkRender = (viewjson, views={})=>{
       }
 
       viewtree.push(React.createElement(componentname, componentprops, componentchildren));
-      k++;
     }
   }
 

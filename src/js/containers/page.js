@@ -17,7 +17,6 @@ const {BulletmarkRender} = Services;
 const mapStateToProps = (state, props)=>{
   const {reducePage} = state;
   let pagepath = props.params.pagepath || CONFIG.pages.indexroute;
-  console.log('pagepath', pagepath);
 
   let nextProps = {page: pagepath};
   nextProps.fetching = reducePage.getIn(['pages', pagepath, 'fetching']);

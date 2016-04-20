@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import Immutable from 'immutable';
+import {replace} from 'react-router-redux';
 import {timeNow} from '../util';
 
 
@@ -9,7 +10,8 @@ const defaultState = Immutable.fromJS({
   fetchingPagelist: false,
   pagelist: Immutable.Set.of('indexroute'),
   pagelistUpdatetime: 0,
-  pages: Immutable.Map({})
+  pages: Immutable.Map({}),
+  pagequeue: Immutable.Map({base: '', page: ''})
 });
 
 
@@ -25,6 +27,100 @@ const shouldUpdatePagelist = (state)=>{
 const shouldUpdatePage = (state, page)=>{
   // should update if: (page does NOT exist) OR (page is NOT fetching currently AND time to last page updatetime is greater than the minimum)
   return !(state.getIn(['pages', page])) || !(state.getIn(['pages', page, 'fetching'])) && (timeNow() - state.getIn(['pages', page, 'updatetime']) > MIN_UPDATE_TIME);
+};
+
+const shouldWaitForPagelist = (state)=>{
+  return state.get('fetchingPagelist');
+};
+
+const hasElementInQueue = (state)=>{
+  return state.getIn(['pagequeue', 'page']).length > 0;
+};
+
+const pagelistHasPage = (state, page)=>{
+  return state.get('pagelist').has(page);
+};
+
+
+/* Pages
+------------------------------------------*/
+
+//SYMBOLS
+const QUEUE_PAGE = Symbol('QUEUE_PAGE');
+const CLEAR_QUEUE_PAGE = Symbol('CLEAR_QUEUE_PAGE');
+const FETCH_PAGE = Symbol('FETCH_PAGE');
+const FETCHING_PAGE = Symbol('FETCHING_PAGE');
+const RECEIVE_PAGE = Symbol('RECEIVE_PAGE');
+const ERR_PAGE = Symbol('ERR_PAGE');
+
+// ACTION CREATORS
+const queuePage = (base, url)=>{
+  return {
+    type: QUEUE_PAGE,
+    base: base,
+    page: url
+  };
+};
+
+const clearQueuePage = ()=>{
+  return {
+    type: CLEAR_QUEUE_PAGE
+  };
+};
+
+const fetchingPage = (url)=>{
+  return {
+    type: FETCHING_PAGE,
+    page: url
+  };
+};
+
+const receivePage = (url, json)=>{
+  return {
+    type: RECEIVE_PAGE,
+    page: url,
+    content: json
+  };
+};
+
+const errPage = (url)=>{
+  return {
+    type: ERR_PAGE,
+    page: url
+  };
+};
+
+const fetchPage = (base, url)=>{
+  if(typeof base != 'string'){
+    console.log('err fetchpagelist: base must be string, base: ', base);
+    return;
+  }
+  if(typeof url != 'string'){
+    console.log('err fetchpagelist: url must be string, url: ', url);
+    return;
+  }
+  return (dispatch, getState)=>{
+    if(shouldUpdatePage(getState().reducePage, url)){
+      if(shouldWaitForPagelist(getState().reducePage)){
+        dispatch(queuePage(base, url));
+      } else if(pagelistHasPage(getState().reducePage, url)){
+        dispatch(fetchingPage(url));
+        return fetch(base+'/'+url)
+          .then((res)=>{
+            return res.json();
+          })
+          .then((json)=>{
+            dispatch(receivePage(url, json));
+          }).catch((err)=>{
+            console.log(err);
+            dispatch(errPage(url));
+          });
+      } else {
+        dispatch(replace('/404'));
+      }
+    }
+    return Promise.resolve();
+  };
 };
 
 
@@ -72,70 +168,14 @@ const fetchPagelist = (url)=>{
         })
         .then((json)=>{
           dispatch(receivePagelist(json));
+          if(hasElementInQueue(getState().reducePage)){
+            const queue = getState().reducePage.get('pagequeue');
+            dispatch(fetchPage(queue.get('base'), queue.get('page')));
+            dispatch(clearQueuePage());
+          }
         }).catch((err)=>{
           console.log(err);
           dispatch(errPagelist());
-        });
-    } else {
-      return Promise.resolve();
-    }
-  };
-};
-
-
-/* Pages
-------------------------------------------*/
-
-//SYMBOLS
-const FETCH_PAGE = Symbol('FETCH_PAGE');
-const FETCHING_PAGE = Symbol('FETCHING_PAGE');
-const RECEIVE_PAGE = Symbol('RECEIVE_PAGE');
-const ERR_PAGE = Symbol('ERR_PAGE');
-
-// ACTION CREATORS
-const fetchingPage = (url)=>{
-  return {
-    type: FETCHING_PAGE,
-    page: url
-  };
-};
-
-const receivePage = (url, json)=>{
-  return {
-    type: RECEIVE_PAGE,
-    page: url,
-    content: json
-  };
-};
-
-const errPage = (url)=>{
-  return {
-    type: ERR_PAGE,
-    page: url
-  };
-};
-
-const fetchPage = (base, url)=>{
-  if(typeof base != 'string'){
-    console.log('err fetchpagelist: base must be string, base: ', base);
-    return;
-  }
-  if(typeof url != 'string'){
-    console.log('err fetchpagelist: url must be string, url: ', url);
-    return;
-  }
-  return (dispatch, getState)=>{
-    if(shouldUpdatePage(getState().reducePage, url)){
-      dispatch(fetchingPage(url));
-      return fetch(base+'/'+url)
-        .then((res)=>{
-          return res.json();
-        })
-        .then((json)=>{
-          dispatch(receivePage(url, json));
-        }).catch((err)=>{
-          console.log(err);
-          dispatch(errPage(url));
         });
     } else {
       return Promise.resolve();
@@ -160,6 +200,10 @@ const reducePage = (state=defaultState, action)=>{
     case ERR_PAGELIST:
       return state.set('fetchingPagelist', false);
     // Pages
+    case QUEUE_PAGE:
+      return state.set('pagequeue', Immutable.Map({base: action.base, page: action.page}));
+    case CLEAR_QUEUE_PAGE:
+      return state.set('pagequeue', Immutable.Map({base: '', page: ''}));
     case FETCH_PAGE:
       return state;
     case FETCHING_PAGE:

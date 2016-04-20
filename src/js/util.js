@@ -1,14 +1,14 @@
-const hashCode = (theString)=>{
-  if(theString.length < 1){
-    return 0;
-  }
+import murmurhash3 from 'murmurhash3js';
+import platform from 'platform';
 
-  let hash = 0;
-  for (let i = 0; i < theString.length; i++){
-    hash = ((hash << 5) - hash) + theString.charCodeAt(i);
-    hash = hash & hash;
+const SEED = Math.floor(Date.now() / 1000);
+
+const hashCode = (theString)=>{
+  let arch = 'x86';
+  if(platform.os.architecture == 64){
+    arch = 'x64';
   }
-  return hash;
+  return murmurhash3[arch].hash128(theString, SEED);
 };
 
 const timeNow = ()=>{
