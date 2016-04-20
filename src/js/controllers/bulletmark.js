@@ -50,14 +50,15 @@ const BulletmarkRender = (viewjson, views={})=>{
         key: k
       };
       let componentchildren = null;
+      
       if(i.props){
         Object.assign(componentprops, i.props);
       }
       if(i.children){
-        componentchildren = i.children;
+        componentchildren = BulletmarkRender(i.children, views);
       }
 
-      viewtree.push(React.createElement(componentname, componentprops, BulletmarkRender(componentchildren, views)));
+      viewtree.push(React.createElement(componentname, componentprops, componentchildren));
       k++;
     }
   }
@@ -100,15 +101,15 @@ const headerparse = (text)=>{
 
 const componentparse = (text)=>{
   const [first, second, ...third] = text.trim().substring(1, text.length-1).split('|');
-  const [component, configtext, childrentext] = [first, second, third.join('|')].map((text)=>{return text.trim();});
+  const [component, propstext, childrentext] = [first, second, third.join('|')].map((text)=>{return text.trim();});
 
-  // parse config
-  let hasConfig = false;
-  let config = {};
-  if(configtext && configtext.length > 0){
-    hasConfig = true;
-    for(let i of configtext.split().map((text)=>{return text.split('=')})){
-      config[i[0]] = i[1];
+  // parse props
+  let hasProps = false;
+  let props = {};
+  if(propstext && propstext.length > 0){
+    hasProps = true;
+    for(let i of propstext.split().map((text)=>{return text.split('=')})){
+      props[i[0]] = i[1];
     }
   };
 
@@ -122,8 +123,8 @@ const componentparse = (text)=>{
 
   // assemble json
   let componentjson = {component};
-  if(hasConfig){
-    componentjson.config = config;
+  if(hasProps){
+    componentjson.props = props;
   }
   if(hasChildren){
     componentjson.children = children;

@@ -16,7 +16,8 @@ const {BulletmarkRender} = Services;
 ------------------------------------------*/
 const mapStateToProps = (state, props)=>{
   const {reducePage} = state;
-  let pagepath = props.params.pagepath || props.route.page;
+  let pagepath = props.params.pagepath || CONFIG.pages.indexroute;
+  console.log('pagepath', pagepath);
 
   let nextProps = {page: pagepath};
   nextProps.fetching = reducePage.getIn(['pages', pagepath, 'fetching']);
@@ -40,10 +41,14 @@ class Page extends React.Component {
     this.props.fetchPage(CONFIG.api.pages, this.props.page);
   }
 
+  componentWillUpdate(nextProps, nextState){
+    this.props.fetchPage(CONFIG.api.pages, nextProps.page);
+  }
+
   render(){
     const {content} = this.props;
     return <div className="container">
-      {this.props.content && BulletmarkRender(this.props.content, Views)}
+      {(content) && BulletmarkRender(content, Views)}
     </div>;
   }
 };
@@ -53,9 +58,9 @@ Page = connect(mapStateToProps, mapDispatchToProps)(Page);
 
 /* Page Routes
 ------------------------------------------*/
-const PageRoute = (prefix='', index=false, indexpagepath='')=>{
+const PageRoute = (prefix='', index=false)=>{
   if(index){
-    return <IndexRoute page={indexpagepath} component={Page}/>;
+    return <IndexRoute component={Page}/>;
   } else {
     return <Route path={prefix + '/:pagepath'} component={Page}/>;
   }

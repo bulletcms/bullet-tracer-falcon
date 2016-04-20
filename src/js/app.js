@@ -44,9 +44,9 @@ class App extends React.Component {
 
   render(){
     return <div className='app'>
-      <Nav config={CONFIG.nav}/>
+      <Nav links={CONFIG.nav.links}/>
       {this.props.children}
-      <Creator config={CONFIG.creator}/>
+      <Creator names={CONFIG.creator.names} copyright={CONFIG.creator.copyright}/>
     </div>;
   }
 }
@@ -58,7 +58,7 @@ App = connect(mapStateToProps, mapDispatchToProps)(App);
 ------------------------------------------*/
 const AppRoute = ()=>{
   return <Route path='/' component={App}>
-    {PageRoute(null, true, CONFIG.pages.indexroute)}
+    {PageRoute(null, true)}
     {PageRoute('page')}
     {DashRoute(CONFIG.dash)}
     {DoesNotExistRoute()}

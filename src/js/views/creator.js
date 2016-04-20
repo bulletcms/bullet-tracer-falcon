@@ -1,6 +1,13 @@
 import React from 'react';
 
 class Creator extends React.Component{
+  static get propTypes() {
+    return {
+      names: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+      copyright: React.PropTypes.number
+    };
+  }
+
   nameArrToStr(nameArr){
     let k = '';
     let len = nameArr.length;
@@ -24,7 +31,7 @@ class Creator extends React.Component{
   }
 
   render(){
-    const {names, copyright} = this.props.config;
+    const {names, copyright} = this.props;
     return <div>
       <small>
         <span className="fa-stack">
@@ -35,7 +42,7 @@ class Creator extends React.Component{
         <span className="fa-stack">
           <i className="fa fa-heart fa-stack-1x"></i>
         </span>
-        by {this.nameArrToStr(names)} &copy; {copyright} - {new Date().getFullYear()}
+        by {this.nameArrToStr(names)} {(copyright) && <span>&copy; {copyright} - {new Date().getFullYear()}</span>}
       </small>
     </div>;
   }

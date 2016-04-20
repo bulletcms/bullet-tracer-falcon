@@ -26,7 +26,7 @@ class Nav extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    return this.state.data.equals(nextState.data);
+    return !(this.state.data.equals(nextState.data));
   }
 
   componentDidMount(){
@@ -38,7 +38,7 @@ class Nav extends React.Component {
   }
 
   render(){
-    const {links} = this.props.config;
+    const {links} = this.props;
 
     let listItems = [];
     for(let i of links){

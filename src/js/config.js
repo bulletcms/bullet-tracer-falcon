@@ -2,7 +2,8 @@ export default {
   nav: {
     links: [
       {name: 'home', path: '/'},
-      {name: 'about', path: '/about'},
+      {name: 'about', path: '/page/about'},
+      {name: 'kevin', path: '/page/kevin'},
       {name: 'blog', path: '/blog'},
       {name: 'dash', path: '/dash'}
     ]

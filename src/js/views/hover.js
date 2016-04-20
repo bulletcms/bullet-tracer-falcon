@@ -2,23 +2,30 @@ import React from 'react';
 import Immutable from 'immutable';
 
 class Hover extends React.Component {
+  static get propTypes() {
+    return {
+      defaultview: React.PropTypes.node.isRequired,
+      hoverview: React.PropTypes.node.isRequired
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {data: Immutable.Map({isHovering: false})};
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  handleMouseOver(){
+  handleMouseEnter(){
     this.setState({data: this.state.data.set('isHovering', true)});
   }
 
-  handleMouseOut(){
+  handleMouseLeave(){
     this.setState({data: this.state.data.set('isHovering', false)});
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    return this.state.data.equals(nextState.data);
+    return !(this.state.data.equals(nextState.data));
   }
 
   render(){
@@ -28,7 +35,7 @@ class Hover extends React.Component {
     if(this.state.data.get('isHovering')){
       finalview = hoverview;
     }
-    return <span onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>{finalview}</span>;
+    return <span onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>{finalview}</span>;
   }
 }
 

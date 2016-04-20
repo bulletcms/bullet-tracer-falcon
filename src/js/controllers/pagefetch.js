@@ -51,10 +51,9 @@ const receivePagelist = (json)=>{
   };
 };
 
-const errPagelist = (err)=>{
+const errPagelist = ()=>{
   return {
-    type: ERR_PAGELIST,
-    err: err
+    type: ERR_PAGELIST
   };
 };
 
@@ -74,7 +73,8 @@ const fetchPagelist = (url)=>{
         .then((json)=>{
           dispatch(receivePagelist(json));
         }).catch((err)=>{
-          dispatch(errPagelist(err));
+          console.log(err);
+          dispatch(errPagelist());
         });
     } else {
       return Promise.resolve();
@@ -127,17 +127,14 @@ const fetchPage = (base, url)=>{
   return (dispatch, getState)=>{
     if(shouldUpdatePage(getState().reducePage, url)){
       dispatch(fetchingPage(url));
-      console.log('first');
       return fetch(base+'/'+url)
         .then((res)=>{
-          console.log('res', res);
           return res.json();
         })
         .then((json)=>{
-          console.log('json', json);
           dispatch(receivePage(url, json));
         }).catch((err)=>{
-          console.log('err', err);
+          console.log(err);
           dispatch(errPage(url));
         });
     } else {
@@ -161,7 +158,6 @@ const reducePage = (state=defaultState, action)=>{
         .set('fetchingPagelist', false)
         .set('pagelistUpdatetime', timeNow());
     case ERR_PAGELIST:
-      console.log('err pagelist', action.err);
       return state.set('fetchingPagelist', false);
     // Pages
     case FETCH_PAGE:

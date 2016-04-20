@@ -1,29 +1,31 @@
 # TODO
 
-- [ ] page renderer
-  - [x] data pass from config to view
-  - [ ] fetch action created from view
-  - [ ] fetch action fetches data
-    - [ ] fetch action dispatches stop requesting more api calls
-  - [ ] data pass from action to reducer to state
-  - [ ] renderer component updates from state
-    - [ ] use reselect to improve render time
-  - [ ] renderer component action http get
-  - [ ] renderer component assembles view from json
-    - [ ] possibly reactdomserver.rendertostaticmarkup
+- [ ] nav
+  - [ ] nav updates view from fetch state
 - [ ] performance
-  - [ ] gulp-imagemin
-- [x] style
-  - [x] refactor scss into config and main
+  - [ ] gulp-imagemin OR tiny png
 - [ ] dashboard
   - [ ] authentication manager
   - [ ] pages editor
+    - [x] parse bulletmark
+    - [ ] send post request
+    - [ ] view list of pages
+    - [ ] edit pages
   - [ ] blog post editor
-- [x] refactor page system
-  - [x] write out state
-- [ ] new app boot process
-   - [ ] first pagelistfetch
-   - [ ] page state has list of accessible pages from pagelistfetch
-   - [ ] page can get pages based on route
+
+### Done
+- [x] new app boot process
+   - [x] first pagelistfetch
+   - [x] page state has list of accessible pages from pagelistfetch
+   - [x] page can get pages based on route
    - [x] page fetch services
-   - [ ] page renderer must use react create element
+- [x] page renderer
+  - [x] fetch action created from view
+  - [x] fetch action fetches data
+    - [x] fetch action dispatches stop requesting more api calls
+  - [x] data pass from action to reducer to state
+  - [x] page component updates from state
+  - [x] renderer assembles view from json
+    - [x] page renderer must use react create element
+- [x] style
+  - [x] refactor scss into config and main
