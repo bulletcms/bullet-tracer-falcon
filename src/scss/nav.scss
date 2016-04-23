@@ -1,0 +1,46 @@
+/* Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+$height: 64px;
+.nav {
+  .nav-spacer {
+    display: none;
+    height: $height;
+  }
+
+  .nav-container {
+    z-index: 64;
+    position: static;
+    height: $height;
+    width: 100%;
+    background-color: rgba(250, 250, 255, 0.85);
+
+    .nav-list {
+      list-style: none;
+      margin: 0;
+
+      .nav-item {
+        display: inline-block;
+        margin: 0 28px 0 0;
+        padding: 2px;
+
+        a {
+          text-decoration: none;
+          color: #222222;
+          line-height: $height;
+        }
+      }
+    }
+  }
+}
+
+.nav.docked {
+  .nav-spacer {
+    display: block;
+  }
+
+  .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+}
