@@ -5,11 +5,11 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /*color*/
-$coloraccent: #239687;
+$coloraccent: #42586E;
 $colorhighlight: #AAFAFF;
-$colorbase: #222222;
-$colorlight: #FAFAFF;
-$colordark: #111111;
+$colorbase: #1B3147;
+$colorlight: #FFFFFF;
+$colordark: #0C2032;
 
 /*sizes*/
 $titlebarheight: 80px;
@@ -80,7 +80,6 @@ $titlebarheight: 80px;
   .content {
     padding: 16px;
     box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5);
-    background-color: $colorlight;
     z-index: 1;
 
     .list {

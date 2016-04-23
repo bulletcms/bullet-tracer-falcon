@@ -2613,8 +2613,8 @@ h6 {
 .dash-sidebar {
   padding: 0;
   z-index: 1;
-  background-color: #222222;
-  color: #FAFAFF; }
+  background-color: #1B3147;
+  color: #FFFFFF; }
   .dash-sidebar a {
     text-decoration: none;
     color: inherit; }
@@ -2624,7 +2624,7 @@ h6 {
     text-align: center;
     line-height: 80px;
     font-size: 20px;
-    background-color: #239687;
+    background-color: #42586E;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5); }
   .dash-sidebar .dash-sidebar-container ul.dash-list {
     list-style: none;
@@ -2637,14 +2637,14 @@ h6 {
         font-size: 16px;
         line-height: 32px; }
         .dash-sidebar .dash-sidebar-container ul.dash-list .dash-item div:hover {
-          background-color: #111111; }
+          background-color: #0C2032; }
 
 .dash-container {
   padding: 0;
   z-index: 2; }
   .dash-container .title {
-    background-color: #239687;
-    color: #FAFAFF;
+    background-color: #42586E;
+    color: #FFFFFF;
     line-height: 80px;
     font-size: 24px;
     padding: 0 16px;
@@ -2653,7 +2653,6 @@ h6 {
   .dash-container .content {
     padding: 16px;
     box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.5);
-    background-color: #FAFAFF;
     z-index: 1; }
     .dash-container .content .list {
       list-style: none;
