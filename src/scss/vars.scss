@@ -1,3 +1,4 @@
+
 /**
 *  $LAYOUT
 */
@@ -14,7 +15,7 @@ $border-box:                true;
 *  $FONT
 */
 
-$basefont: 'Lato', sans-serif;
+$basefont: 'Open sans', sans-serif;
 $codefont: 'Courier New', monospace;
 
 $font-size-base:        14px;
@@ -42,30 +43,25 @@ $color-info:            #5bc0de;
 $color-warning:         #f0ad4e;
 $color-error:           #e74c3c;
 
-
-
 // Body background
-$body-bg:               #2c3e50;
+$body-bg:               #ffffff;
+
 
 // Grey :               #dee6ea;
-$grey-light:            #edf3f6;
+$grey-light:            #f1f1f1;
 $grey-soft:             #edf3f6;
 $grey-dark:             #969da6;
 $background-grey:       $grey-soft;
-$border-color:          #465f78;
+$border-color:          #dfdfdf;
 
-// Typography colors
-$text-dark:             #3e4145;   // body text
-$text-color:            $white;
-$text-grey:             #969da6;
-
-// Tags
-$tag-text-color:        $text-color;
-$tag-bg-color:          #34495e;
-$tag-bullet:            $body-bg;
 
 // Rating
-$rating-bg:             #34495e;
+$rating-bg:             $grey-soft;
+
+// Tipography colors
+$text-dark:             #3e4145;   // body text
+$text-color:            $text-dark;
+$text-grey:             #969da6;
 
 // Headings
 $heading-font:          $basefont;
@@ -77,13 +73,19 @@ $shadow-color:          rgba(0, 0, 0, .2);
 $box-shadow:            0 0 5px $shadow-color;
 
 // Forms
-$form-bg-color:         #34495e;
+$form-bg-color:         $grey-soft;
 $form-text-color:       $text-color;
 
 // Tables
-$table-bg-color:        #34495e;
+$table-bg-color:        $grey-soft;
 $table-header-bg-color: $body-bg;
 $table-text-color:      $text-color;
+
+// Tags
+$tag-text-color:        $text-color;
+$tag-bg-color:          $grey-soft;
+$tag-bullet:            $body-bg;
+
 
 // text map
 $text-color-map: (
@@ -169,9 +171,8 @@ $background-color-map: map-merge($background-color-map, (
 /**
 *  $BUTTONS
 */
-
 $button-bg-color:       #64829f; // default color for buttons
-$button-text-color:     $text-color; // default color for buttons
+$button-text-color:     $white; // default color for buttons
 $button-border-color:   $body-bg;
 $button-border-radius:  2em;
 $button-sizes: (
@@ -213,7 +214,7 @@ $button-sizes: (
 */
 
 $badge-color:           $text-color;
-$badge-bg:              #34495e;
+$badge-bg:              $grey-soft;
 
 $badges-color-map: (
   primary:              $brand-primary,
@@ -231,7 +232,7 @@ $badges-color-map: (
 */
 
 $paginator-item-radius:       $radius;
-$paginator-item-bg:           #34495e;
+$paginator-item-bg:           $grey-soft;
 $paginator-item-color:        $text-color;
 
 $paginator-item-border:       $body-bg;         // only for compact paginator
