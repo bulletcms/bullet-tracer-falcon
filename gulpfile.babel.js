@@ -18,6 +18,7 @@ import uglify from 'gulp-uglify';
 
 //SCSS//
 import scss from 'gulp-sass';
+import cleancss from 'gulp-clean-css';
 
 //LOCAL SERVE//
 import webserver from 'gulp-webserver';
@@ -60,6 +61,7 @@ let scssbuild = ()=>{
   return gulp.src(PATHS.MAINSCSS)
     .pipe(gulpif(argv.d, scss()))
     .pipe(gulpif(!argv.d, scss({ style: 'compressed' })))
+    .pipe(gulpif(!argv.d, cleancss()))
     .pipe(gulpif(!argv.d, size()))
     .pipe(gulp.dest(PATHS.DIST));
 };
@@ -89,11 +91,15 @@ gulp.task(assetsbuild);
 
 
 let watch = ()=>{
-  gulp.watch(PATHS.JSDIR, (cb)=>{gulp.series('jsbuild')(); cb();});
-  gulp.watch(PATHS.SCSSDIR, (cb)=>{gulp.series('scssbuild')(); cb();})
-  gulp.watch(PATHS.INDEXHTML, (cb)=>{gulp.series('htmlbuild')(); cb();});
-  gulp.watch(PATHS.ASSETS, (cb)=>{gulp.series('assetsbuild')(); cb();});
-  gutil.log('LOADED');
+  if(argv.s){
+    gulp.watch(PATHS.JSDIR, (cb)=>{gulp.series('jsbuild')(); cb();});
+    gulp.watch(PATHS.SCSSDIR, (cb)=>{gulp.series('scssbuild')(); cb();})
+    gulp.watch(PATHS.INDEXHTML, (cb)=>{gulp.series('htmlbuild')(); cb();});
+    gulp.watch(PATHS.ASSETS, (cb)=>{gulp.series('assetsbuild')(); cb();});
+    gutil.log('LOADED');
+  } else {
+    return;
+  }
 };
 watch.description = 'watches js, css, html, assets';
 watch.flags = {};
