@@ -118,11 +118,11 @@ let serve = (cb)=>{
   return gulp.src(PATHS.DIST)
     .pipe(gulpif(argv.s, webserver({
       livereload: true,
-      port: 8080,
+      port: 3000,
       fallback: 'index.html'
     })));
 };
-serve.description = 'serves ./dist on localhost:8080';
+serve.description = 'serves ./dist on localhost:3000';
 serve.flags = {
   '-s': 'serves application on localhost'
 };
