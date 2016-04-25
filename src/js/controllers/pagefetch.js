@@ -79,7 +79,7 @@ const receivePage = (url, json)=>{
   return {
     type: RECEIVE_PAGE,
     page: url,
-    content: json
+    json: json
   };
 };
 
@@ -209,7 +209,9 @@ const reducePage = (state=defaultState, action)=>{
     case FETCHING_PAGE:
       return state.setIn(['pages', action.page, 'fetching'], true);
     case RECEIVE_PAGE:
-      return state.setIn(['pages', action.page, 'content'], action.content.data)
+      return state.setIn(['pages', action.page, 'content'], action.json.data.content)
+        .setIn(['pages', action.page, 'title'], action.json.data.title)
+        .setIn(['pages', action.page, 'tags'], action.json.data.tags)
         .setIn(['pages', action.page, 'updatetime'], timeNow())
         .setIn(['pages', action.page, 'fetching'], false);
     case ERR_PAGE:
