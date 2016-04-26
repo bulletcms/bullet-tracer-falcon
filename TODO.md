@@ -9,6 +9,7 @@
   - [ ] pages editor
     - [x] parse bulletmark
     - [ ] send post request
+      - [ ] post system will compose of action creators and a queue
     - [ ] view list of pages
     - [ ] edit pages
   - [ ] blog post editor
