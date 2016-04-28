@@ -100,10 +100,10 @@ const fetchPage = (base, url)=>{
     return;
   }
   return (dispatch, getState)=>{
-    if(shouldUpdatePage(getState().reducePage, url)){
-      if(shouldWaitForPagelist(getState().reducePage)){
+    if(shouldUpdatePage(getState().pagefetch, url)){
+      if(shouldWaitForPagelist(getState().pagefetch)){
         dispatch(queuePage(base, url));
-      } else if(pagelistHasPage(getState().reducePage, url)){
+      } else if(pagelistHasPage(getState().pagefetch, url)){
         dispatch(fetchingPage(url));
         return fetch(base+'/'+url)
           .then((res)=>{
@@ -159,7 +159,7 @@ const fetchPagelist = (url)=>{
     return;
   }
   return (dispatch, getState)=>{
-    if(shouldUpdatePagelist(getState().reducePage)){
+    if(shouldUpdatePagelist(getState().pagefetch)){
       dispatch(fetchingPagelist());
 
       return fetch(url)
@@ -168,8 +168,8 @@ const fetchPagelist = (url)=>{
         })
         .then((json)=>{
           dispatch(receivePagelist(json));
-          if(hasElementInQueue(getState().reducePage)){
-            const queue = getState().reducePage.get('pagequeue');
+          if(hasElementInQueue(getState().pagefetch)){
+            const queue = getState().pagefetch.get('pagequeue');
             dispatch(fetchPage(queue.get('base'), queue.get('page')));
             dispatch(clearQueuePage());
           }
@@ -186,7 +186,7 @@ const fetchPagelist = (url)=>{
 
 /* Reducer
 ------------------------------------------*/
-const reducePage = (state=defaultState, action)=>{
+const pagefetch = (state=defaultState, action)=>{
   switch (action.type) {
     // Pagelist
     case FETCH_PAGELIST:
@@ -223,6 +223,6 @@ const reducePage = (state=defaultState, action)=>{
 
 
 const PagefetchActions = {fetchPagelist, fetchPage};
-const PagefetchReducers = {reducePage};
+const PagefetchReducers = {pagefetch};
 
 export {PagefetchActions, PagefetchReducers};

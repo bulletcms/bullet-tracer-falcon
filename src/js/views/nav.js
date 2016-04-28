@@ -53,7 +53,7 @@ class Nav extends React.Component {
     return <nav className={navClassName}>
       <div className="nav-spacer"></div>
       <div className="nav-container">
-        <div className="container">
+        <div className="">
           <ul className="nav-list">
             {listItems}
           </ul>

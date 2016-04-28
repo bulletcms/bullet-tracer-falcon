@@ -15,14 +15,14 @@ const {BulletmarkRender} = Services;
 /* Connect Redux
 ------------------------------------------*/
 const mapStateToProps = (state, props)=>{
-  const {reducePage} = state;
+  const {pagefetch} = state;
   let pagepath = props.params.pagepath || CONFIG.pages.indexroute;
 
   let nextProps = {page: pagepath};
-  nextProps.fetching = reducePage.getIn(['pages', pagepath, 'fetching']);
+  nextProps.fetching = pagefetch.getIn(['pages', pagepath, 'fetching']);
   if(!nextProps.fetching){
-    nextProps.content = reducePage.getIn(['pages', pagepath, 'content']);
-    nextProps.updatetime = reducePage.getIn(['pages', pagepath, 'updatetime']);
+    nextProps.content = pagefetch.getIn(['pages', pagepath, 'content']);
+    nextProps.updatetime = pagefetch.getIn(['pages', pagepath, 'updatetime']);
   }
   return nextProps;
 };

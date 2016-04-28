@@ -5,25 +5,49 @@ import Immutable from 'immutable';
 /* App state
 ------------------------------------------*/
 const defaultState = Immutable.fromJS({
-  fetchingPagelist: false,
-  pagelist: Immutable.Set.of('indexroute'),
-  pagelistUpdatetime: 0,
-  pages: Immutable.Map({}),
-  queue: Immutable.List([])
+  currentPage: '',
+  page: {
+    path: '',
+    title: '',
+    tags: [],
+    content: {}
+  },
+  opsQueue: []
 });
 
+/* State services
+------------------------------------------*/
 
 /* Pages
 ------------------------------------------*/
 
 // SYMBOLS
 
-// Queue
-const QUEUE_PAGE = Symbol('QUEUE_PAGE');
-const READ_QUEUE_PAGE = Symbol('READ_QUEUE_PAGE');
+// editing
+const SET_CURRENT_PAGE = Symbol('SET_CURRENT_PAGE');
+const CLEAR_CURRENT_PAGE = Symbol('CLEAR_CURRENT_PAGE');
+const EDIT_PAGE = Symbol('EDIT_PAGE');
+const RESET_PAGE_EDITS = Symbol('RESET_PAGE_EDITS');
+const NEW_PAGE = Symbol('NEW_PAGE');
+const MODIFY_PAGE_PROPS = Symbol('MODIFY_PAGE_PROPS');
 
-// Ops
-const FETCH_PAGE = Symbol('FETCH_PAGE');
-const FETCHING_PAGE = Symbol('FETCHING_PAGE');
-const RECEIVE_PAGE = Symbol('RECEIVE_PAGE');
-const ERR_PAGE = Symbol('ERR_PAGE');
+
+// posting
+const POST_PAGE = Symbol('POST_PAGE');
+const POSTING_PAGE = Symbol('POSTING_PAGE');
+const DELETE_PAGE = Symbol('DELETE_PAGE');
+const PUT_PAGE = Symbol('PUT_PAGE');
+const SUCCESS_POST_PAGE = Symbol('SUCCESS_POST_PAGE');
+const ERR_POST_PAGE = Symbol('ERR_POST_PAGE');
+
+
+// ACTION CREATORS
+
+/* Reducer
+------------------------------------------*/
+const pagepost = (state=defaultState, action)=>{
+  switch(action.type){
+    default:
+      return state;
+  }
+};

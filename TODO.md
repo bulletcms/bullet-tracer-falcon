@@ -4,6 +4,7 @@
   - [ ] nav updates view from fetch state
 - [ ] performance
   - [ ] gulp-imagemin OR tiny png
+  - [ ] use reselect to memoize map state to props
 - [ ] dashboard
   - [ ] authentication manager
   - [ ] pages editor

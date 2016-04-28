@@ -19,12 +19,12 @@ const {fetchPagelist} = Actions;
 /* Connect Redux
 ------------------------------------------*/
 const mapStateToProps = (state)=>{
-  const {reducePage} = state;
+  const {pagefetch} = state;
   let nextProps = {};
-  nextProps.fetching = reducePage.get('fetchingPagelist');
+  nextProps.fetching = pagefetch.get('fetchingPagelist');
   if(!nextProps.fetching){
-    nextProps.pagelist = reducePage.get('pagelist').toJS();
-    nextProps.updatetime = reducePage.get('pagelistUpdatetime');
+    nextProps.pagelist = pagefetch.get('pagelist').toJS();
+    nextProps.updatetime = pagefetch.get('pagelistUpdatetime');
   }
   return nextProps;
 };
