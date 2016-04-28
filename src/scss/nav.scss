@@ -1,5 +1,7 @@
 /* Navigation
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+$nav-background-color: rgba(250, 250, 255, 0.85);
+
 $height: 64px;
 .nav {
   .nav-spacer {
@@ -12,7 +14,7 @@ $height: 64px;
     position: static;
     height: $height;
     width: 100%;
-    background-color: rgba(250, 250, 255, 0.85);
+    background-color: $nav-background-color;
 
     .nav-list {
       list-style: none;

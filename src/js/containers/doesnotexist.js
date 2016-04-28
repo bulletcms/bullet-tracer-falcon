@@ -3,7 +3,7 @@ import {Route, Redirect} from 'react-router';
 
 class DoesNotExist extends React.Component{
   render(){
-    return <div>
+    return <div className="container">
       <h1>404</h1>
       <h4>Page does not exist.</h4>
     </div>;

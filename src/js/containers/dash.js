@@ -52,38 +52,40 @@ class DashPages extends React.Component {
         <span>Pages</span>
       </div>
       <div className="content">
-        <h4>New Page</h4>
-        <input ref="newpagetitle" className="editortitle" placeholder="Page Title"/>
-        <input ref="newpagepath" className="editorpath" placeholder="Page Path"/>
-        <br/>
-        <textarea ref="newpage" className="editor" cols="80" placeholder="Page Content"></textarea>
-        <br/>
-        <button className="button" onClick={this.handleAddPage.bind(this)}>Add Page</button>
-        <hr/>
-        <h4>Pages</h4>
-        <ul className="list">
-          <li className="list-item">
-            <div>
-              <span className="name">i am a page</span>
-              <ul className="options">
-                <li className="option">option 1</li>
-                <li className="option">option 2</li>
-                <li className="option">option 3</li>
-              </ul>
-            </div>
-          </li>
-          <li className="list-item">
-            <div>
-              <span className="name">i am a page</span>
-              <ul className="options">
-                <li className="option">option 1</li>
-                <li className="option">option 2</li>
-                <li className="option">option 3</li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-        <hr/>
+        <div className="container">
+          <h4>New Page</h4>
+          <input ref="newpagetitle" className="editortitle" placeholder="Page Title"/>
+          <input ref="newpagepath" className="editorpath" placeholder="Page Path"/>
+          <br/>
+          <textarea ref="newpage" className="editor" cols="80" placeholder="Page Content"></textarea>
+          <br/>
+          <button className="button" onClick={this.handleAddPage.bind(this)}>Add Page</button>
+          <hr/>
+          <h4>Pages</h4>
+          <ul className="list">
+            <li className="list-item">
+              <div>
+                <span className="name">i am a page</span>
+                <ul className="options">
+                  <li className="option">option 1</li>
+                  <li className="option">option 2</li>
+                  <li className="option">option 3</li>
+                </ul>
+              </div>
+            </li>
+            <li className="list-item">
+              <div>
+                <span className="name">i am a page</span>
+                <ul className="options">
+                  <li className="option">option 1</li>
+                  <li className="option">option 2</li>
+                  <li className="option">option 3</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <hr/>
+        </div>
       </div>
     </div>;
   }
@@ -101,9 +103,9 @@ class DashBlog extends React.Component {
 
 class Dash extends React.Component {
   render(){
-    return <div className="dash container">
+    return <div className="dash">
       <div className="row">
-        <div className="col-sm-2 dash-sidebar">
+        <div className="column column-10 dash-sidebar">
           <Link to='/dash'><div className="dash-title">
             <span>Dashboard</span>
           </div></Link>
@@ -115,7 +117,7 @@ class Dash extends React.Component {
             </ul>
           </div>
         </div>
-        <div className="col-sm-10 dash-container">
+        <div className="column column-90 dash-container">
           {this.props.children}
         </div>
       </div>
