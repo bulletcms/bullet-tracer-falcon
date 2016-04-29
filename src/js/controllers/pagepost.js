@@ -17,6 +17,10 @@ const defaultState = Immutable.fromJS({
 
 /* State services
 ------------------------------------------*/
+const pagelistHasPage = (state, page)=>{
+  return state.get('pagelist').has(page);
+};
+
 
 /* Pages
 ------------------------------------------*/
@@ -26,8 +30,8 @@ const defaultState = Immutable.fromJS({
 // editing
 const SET_CURRENT_PAGE = Symbol('SET_CURRENT_PAGE');
 const CLEAR_CURRENT_PAGE = Symbol('CLEAR_CURRENT_PAGE');
-const EDIT_PAGE = Symbol('EDIT_PAGE');
 const RESET_PAGE_EDITS = Symbol('RESET_PAGE_EDITS');
+const EDIT_PAGE = Symbol('EDIT_PAGE');
 const NEW_PAGE = Symbol('NEW_PAGE');
 const MODIFY_PAGE_PROPS = Symbol('MODIFY_PAGE_PROPS');
 
@@ -42,6 +46,65 @@ const ERR_POST_PAGE = Symbol('ERR_POST_PAGE');
 
 
 // ACTION CREATORS
+
+const setCurrentPage = (pageId)=>{
+  return {
+    type: SET_CURRENT_PAGE,
+    page: pageId
+  };
+};
+
+const clearCurrentPage = ()=>{
+  return {
+    type: CLEAR_CURRENT_PAGE
+  };
+};
+
+const resetPageEdits = ()=>{
+  return {
+    type: RESET_PAGE_EDITS
+  };
+};
+
+const editPage = (pageId)=>{
+  if(typeof pageId != 'string'){
+    console.log('err edit page: pageId must be string, pageId: ', pageId);
+    return;
+  }
+
+  return (dispatch, getState)=>{
+    if(pagelistHasPage(getState().pagefetch, pageId)){
+      dispatch(setCurrentPage(pageId));
+      dispatch(resetPageEdits());
+    }
+    return Promise.resolve();
+  };
+};
+
+const newPage = (pageId)=>{
+  if(typeof pageId != 'string'){
+    console.log('err edit page: pageId must be string, pageId: ', pageId);
+    return;
+  }
+  return (dispatch, getState)=>{
+    if(!pagelistHasPage(getState().pagefetch, pageId)){
+      dispatch(setCurrentPage(pageId));
+      dispatch(resetPageEdits());
+    }
+    return Promise.resolve();
+  }
+};
+
+const modifyPageProps = (path, title, tags, content)=>{
+  return {
+    type: MODIFY_PAGE_PROPS,
+    path,
+    title,
+    tags,
+    content
+  };
+};
+
 
 /* Reducer
 ------------------------------------------*/

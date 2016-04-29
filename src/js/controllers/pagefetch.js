@@ -99,6 +99,7 @@ const fetchPage = (base, url)=>{
     console.log('err fetchpagelist: url must be string, url: ', url);
     return;
   }
+  
   return (dispatch, getState)=>{
     if(shouldUpdatePage(getState().pagefetch, url)){
       if(shouldWaitForPagelist(getState().pagefetch)){
