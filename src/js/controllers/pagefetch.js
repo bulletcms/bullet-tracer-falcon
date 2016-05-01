@@ -99,7 +99,7 @@ const fetchPage = (base, url)=>{
     console.log('err fetchpagelist: url must be string, url: ', url);
     return;
   }
-  
+
   return (dispatch, getState)=>{
     if(shouldUpdatePage(getState().pagefetch, url)){
       if(shouldWaitForPagelist(getState().pagefetch)){
@@ -190,8 +190,6 @@ const fetchPagelist = (url)=>{
 const pagefetch = (state=defaultState, action)=>{
   switch (action.type) {
     // Pagelist
-    case FETCH_PAGELIST:
-      return state;
     case FETCHING_PAGELIST:
       return state.set('fetchingPagelist', true);
     case RECEIVE_PAGELIST:
@@ -205,8 +203,6 @@ const pagefetch = (state=defaultState, action)=>{
       return state.set('pagequeue', Immutable.Map({base: action.base, page: action.page}));
     case CLEAR_QUEUE_PAGE:
       return state.set('pagequeue', Immutable.Map({base: '', page: ''}));
-    case FETCH_PAGE:
-      return state;
     case FETCHING_PAGE:
       return state.setIn(['pages', action.page, 'fetching'], true);
     case RECEIVE_PAGE:
