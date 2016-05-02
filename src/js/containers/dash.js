@@ -1,10 +1,13 @@
 import React from 'react';
 import {Route, IndexRoute, Redirect, Link} from 'react-router';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Services, Actions} from '../controllers';
 import Immutable from 'immutable';
+import {Editor, EditorState} from 'draft-js';
 
 const {BulletmarkCompile} = Services;
+const {resetPageEdits, editPage, newPage, modifyPageProps} = Actions;
 
 class DashIndex extends React.Component {
   render(){
@@ -30,6 +33,16 @@ class DashAuth extends React.Component {
 }
 
 class DashPages extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {data: Immutable.Map({editorState: EditorState.createEmpty()})};
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(editorState){
+    this.setState({data: this.state.data.set('editorState', editorState)});
+  }
+
   handleAddPage(){
     const title = this.refs.newpagetitle.value;
     const path = this.refs.newpagepath.value;
@@ -47,6 +60,7 @@ class DashPages extends React.Component {
   }
 
   render(){
+    const editorState = this.state.data.get('editorState');
     return <div>
       <div className="title">
         <span>Pages</span>
@@ -54,6 +68,7 @@ class DashPages extends React.Component {
       <div className="content">
         <div className="container">
           <h4>New Page</h4>
+          <Editor editorState={editorState} onChange={this.onChange}/>
           <input ref="newpagetitle" className="editortitle" placeholder="Page Title"/>
           <input ref="newpagepath" className="editorpath" placeholder="Page Path"/>
           <br/>
@@ -101,6 +116,23 @@ class DashBlog extends React.Component {
   }
 }
 
+/* Connect Redux
+------------------------------------------*/
+const mapStateToProps = (state, props)=>{
+  const {pagepost} = state;
+  let nextProps = {
+    page: pagepost.get('page').toJS()
+  };
+  return nextProps;
+};
+
+const mapDispatchToProps = (dispatch)=>{
+  return bindActionCreators({resetPageEdits, editPage, newPage, modifyPageProps}, dispatch);
+};
+
+
+/* Dash
+------------------------------------------*/
 class Dash extends React.Component {
   render(){
     return <div className="dash">
@@ -125,6 +157,11 @@ class Dash extends React.Component {
   }
 }
 
+Dash = connect(mapStateToProps, mapDispatchToProps)(Dash);
+
+
+/* Dash Routes
+------------------------------------------*/
 const DashRoute = (routeconfig) => {
   return [<Route key='0' path={routeconfig.path} component={Dash}>
     <IndexRoute component={DashIndex}/>
@@ -134,5 +171,6 @@ const DashRoute = (routeconfig) => {
   </Route>,
   <Redirect key='1' from='dash/*' to='dash'/>];
 };
+
 
 export {Dash, DashRoute};

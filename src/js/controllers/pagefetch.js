@@ -206,11 +206,13 @@ const pagefetch = (state=defaultState, action)=>{
     case FETCHING_PAGE:
       return state.setIn(['pages', action.page, 'fetching'], true);
     case RECEIVE_PAGE:
-      return state.setIn(['pages', action.page, 'content'], action.json.data.content)
-        .setIn(['pages', action.page, 'title'], action.json.data.title)
-        .setIn(['pages', action.page, 'tags'], action.json.data.tags)
-        .setIn(['pages', action.page, 'updatetime'], timeNow())
-        .setIn(['pages', action.page, 'fetching'], false);
+      return state.setIn(['pages', action.page], Immutable.Map({
+        content: action.json.data.content,
+        title: action.json.data.title,
+        tags: action.json.data.tags,
+        updatetime: timeNow(),
+        fetching: false
+      }));
     case ERR_PAGE:
       return state.setIn(['pages', action.page, 'fetching'], false);
     default:

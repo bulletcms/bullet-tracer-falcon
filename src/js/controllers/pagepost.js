@@ -167,3 +167,8 @@ const pagepost = (state=defaultState, action)=>{
       return state;
   }
 };
+
+const PagepostActions = {resetPageEdits, editPage, newPage, modifyPageProps};
+const PagepostReducers = {pagepost};
+
+export {PagepostActions, PagepostReducers};
