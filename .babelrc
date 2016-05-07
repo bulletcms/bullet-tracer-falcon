@@ -1,4 +1,4 @@
 {
   "presets": ["es2015", "react"],
-  "plugins": ["transform-object-rest-spread", "transform-decorators"]
+  "plugins": ["transform-object-rest-spread", "transform-decorators", "transform-react-remove-prop-types", "transform-react-constant-elements", "transform-react-inline-elements"]
 }
