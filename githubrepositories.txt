@@ -1,2 +1,0 @@
-// Clone into /github_modules
-https://github.com/milligram/milligram.git
