@@ -9,6 +9,8 @@
   - [ ] authentication manager
   - [ ] pages editor
     - [x] parse bulletmark
+      - [ ] create lexer and parser
+      - [ ] document spec
     - [ ] send post request
       - [ ] post system will compose of action creators and a queue
     - [ ] view list of pages

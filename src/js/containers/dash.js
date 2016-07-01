@@ -11,24 +11,24 @@ const {resetPageEdits, editPage, newPage, modifyPageProps} = Actions;
 
 class DashIndex extends React.Component {
   render(){
-    return <div>
-      <div className="title">
-        <span>The Dashboard</span>
+    return <section>
+      <div className="page-header">
+        <h1>The Dashboard</h1>
       </div>
-      <div className="content">
+      <div>
 
       </div>
-    </div>;
+    </section>;
   }
 }
 
 class DashAuth extends React.Component {
   render(){
-    return <div>
-      <div className="title">
-        <span>Authentication</span>
+    return <section>
+      <div className="page-header">
+        <h1>Authentication</h1>
       </div>
-    </div>;
+    </section>;
   }
 }
 
@@ -61,9 +61,9 @@ class DashPages extends React.Component {
 
   render(){
     const editorState = this.state.data.get('editorState');
-    return <div>
-      <div className="title">
-        <span>Pages</span>
+    return <section>
+      <div className="page-header">
+        <h1>Pages</h1>
       </div>
       <div className="content">
         <div className="container">
@@ -82,9 +82,9 @@ class DashPages extends React.Component {
               <div>
                 <span className="name">i am a page</span>
                 <ul className="options">
-                  <li className="option">option 1</li>
-                  <li className="option">option 2</li>
-                  <li className="option">option 3</li>
+                  <li className="option"><a>option 1</a></li>
+                  <li className="option"><a>option 2</a></li>
+                  <li className="option"><a>option 3</a></li>
                 </ul>
               </div>
             </li>
@@ -92,9 +92,9 @@ class DashPages extends React.Component {
               <div>
                 <span className="name">i am a page</span>
                 <ul className="options">
-                  <li className="option">option 1</li>
-                  <li className="option">option 2</li>
-                  <li className="option">option 3</li>
+                  <li className="option"><a>option 1</a></li>
+                  <li className="option"><a>option 2</a></li>
+                  <li className="option"><a>option 3</a></li>
                 </ul>
               </div>
             </li>
@@ -102,17 +102,17 @@ class DashPages extends React.Component {
           <hr/>
         </div>
       </div>
-    </div>;
+    </section>;
   }
 }
 
 class DashBlog extends React.Component {
   render(){
-    return <div>
-      <div className="title">
-        <span>Blog</span>
+    return <section>
+      <div className="page-header">
+        <h1>Blog</h1>
       </div>
-    </div>;
+    </section>;
   }
 }
 
@@ -135,21 +135,19 @@ const mapDispatchToProps = (dispatch)=>{
 ------------------------------------------*/
 class Dash extends React.Component {
   render(){
-    return <div className="dash">
+    return <div className="grid-strict">
       <div className="row">
-        <div className="column column-10 dash-sidebar">
-          <Link to='/dash'><div className="dash-title">
-            <span>Dashboard</span>
+        <div className="col col8-1 sidebar">
+          <Link to='/dash'><div className="title">
+            <h2>Dashboard</h2>
           </div></Link>
-          <div className="dash-sidebar-container">
-            <ul className="dash-list">
-              <li className="dash-item"><Link to='/dash/auth'><div>Auth</div></Link></li>
-              <li className="dash-item"><Link to='/dash/pages'><div>Pages</div></Link></li>
-              <li className="dash-item"><Link to='/dash/blog'><div>Blog</div></Link></li>
-            </ul>
-          </div>
+          <ul className="list">
+            <li className="list-item"><Link to='/dash/auth'><div>Auth</div></Link></li>
+            <li className="list-item"><Link to='/dash/pages'><div>Pages</div></Link></li>
+            <li className="list-item"><Link to='/dash/blog'><div>Blog</div></Link></li>
+          </ul>
         </div>
-        <div className="column column-90 dash-container">
+        <div className="col col8-7">
           {this.props.children}
         </div>
       </div>
