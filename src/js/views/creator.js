@@ -35,8 +35,7 @@ class Creator extends React.Component{
     return <div>
       <small>
         <span className="fa-stack">
-          <i className="fa fa-square fa-stack-2x"></i>
-          <i className="fa fa-terminal fa-stack-1x fa-inverse"></i>
+          <i className="fa fa-code fa-stack-1x"></i>
         </span>
         with
         <span className="fa-stack">

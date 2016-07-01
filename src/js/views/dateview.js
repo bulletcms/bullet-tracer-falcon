@@ -13,10 +13,10 @@ class DateView extends React.Component {
 
   render(){
     const {date, author} = this.props;
-    return <span>
+    return <h6>
       {(author) && <span><strong>{author}</strong> | </span>}
       {(date) && <Hover defaultview={moment.unix(date).fromNow()} hoverview={moment.unix(date).format('YYYY-MM-DD HH:mm:ss ZZ')}/>}
-    </span>;
+    </h6>;
   }
 }
 
