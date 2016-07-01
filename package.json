@@ -48,7 +48,7 @@
     "yargs": "^4.4.0"
   },
   "dependencies": {
-    "bullet-flash": "^0.1.0",
+    "bullet-flash": "^0.1.1",
     "draft-js": "^0.6.0",
     "immutable": "^3.7.6",
     "moment": "^2.12.0",
