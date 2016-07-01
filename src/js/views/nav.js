@@ -42,7 +42,7 @@ class Nav extends React.Component {
 
     let listItems = [];
     for(let i of links){
-      listItems.push(<li key={hashCode(i.path+i.name)} className="nav-item"><Link to={i.path}>{i.name}</Link></li>);
+      listItems.push(<li key={hashCode(i.path+i.name)}><Link to={i.path}>{i.name}</Link></li>);
     }
 
     let navClassName = 'nav';
@@ -53,7 +53,7 @@ class Nav extends React.Component {
     return <nav className={navClassName}>
       <div className="nav-spacer"></div>
       <div className="nav-container">
-        <div className="">
+        <div className="container">
           <ul className="nav-list">
             {listItems}
           </ul>
